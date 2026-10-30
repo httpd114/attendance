@@ -1,0 +1,99 @@
+{% extends "admin_base.html" %}
+{% block title %}制度知识库 · 管理后台{% endblock %}
+{% block heading %}制度知识库{% endblock %}
+
+{% block head_extra %}
+<form method="post" action="/admin/knowledge/reindex">
+  <button class="btn btn-secondary btn-sm" type="submit">重建索引</button>
+</form>
+{% endblock %}
+
+{% block content %}
+
+<!-- ============ 上传区 ============ -->
+<div class="card mb-16">
+  <div class="card-head">
+    <h2>上传制度文档</h2>
+    <span class="sub">支持 Markdown / TXT / PDF，上传后自动切片并向量化入库</span>
+  </div>
+  <div class="card-body">
+    <form method="post" action="/admin/knowledge/upload" enctype="multipart/form-data">
+      <label class="upload-zone" for="kb-file">
+        <input class="file-input" type="file" id="kb-file" name="file"
+               accept=".md,.markdown,.txt,.pdf" required>
+        <strong>点击选择文件</strong>
+        <p>单个文件建议不超过 10MB。PDF 若为扫描件需先 OCR，否则抽不到文字。</p>
+      </label>
+      <div class="flex mt-16">
+        <button class="btn btn-primary" type="submit">上传并索引</button>
+        <span class="text-muted text-sm">
+          切片尺寸 {{ cfg.chunk_size if cfg else 500 }} 字，切分不跨章节
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ 文档列表 ============ -->
+<div class="card">
+  <div class="card-head">
+    <h2>已上传文档</h2>
+    <span class="sub">共 {{ documents|length }} 份 · 索引内切片 {{ stats.chunk_count if stats else 0 }} 块</span>
+  </div>
+  <div class="card-body tight">
+    {% if not documents %}
+    <div class="empty">还没有上传任何制度文档。员工问答将无法检索到制度原文。</div>
+    {% else %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>文件名</th>
+            <th>类型</th>
+            <th>大小</th>
+            <th>切片数</th>
+            <th>状态</th>
+            <th>上传时间</th>
+            <th style="width:150px">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for d in documents %}
+          <tr>
+            <td class="cell-strong">{{ d.filename }}</td>
+            <td><span class="tag tag-muted">{{ d.file_type }}</span></td>
+            <td class="cell-muted">{{ (d.size_bytes / 1024)|round(1) }} KB</td>
+            <td>{{ d.chunk_count }}</td>
+            <td>
+              {% if d.status == 'ready' %}
+                <span class="tag tag-ok">就绪</span>
+              {% elif d.status == 'processing' %}
+                <span class="tag tag-info">处理中</span>
+              {% else %}
+                <span class="tag tag-danger">失败</span>
+              {% endif %}
+            </td>
+            <td class="cell-muted nowrap">{{ d.created_at[:16].replace('T', ' ') }}</td>
+            <td>
+              <a class="btn btn-ghost btn-sm" href="/admin/knowledge/documents/{{ d.id }}/chunks">切片</a>
+              <form method="post" action="/admin/knowledge/documents/{{ d.id }}/delete"
+                    style="display:inline"
+                    onsubmit="return confirm('确认删除《{{ d.filename }}》？\n删除后该文档的切片会立即从检索索引中移除。');">
+                <button class="btn btn-ghost btn-sm text-danger" type="submit">删除</button>
+              </form>
+            </td>
+          </tr>
+          {% if d.status == 'failed' and d.error_msg %}
+          <tr>
+            <td colspan="7" class="cell-muted text-danger">失败原因：{{ d.error_msg }}</td>
+          </tr>
+          {% endif %}
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

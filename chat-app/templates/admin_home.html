@@ -1,0 +1,84 @@
+{% extends "admin_base.html" %}
+{% block title %}概览 · 管理后台{% endblock %}
+{% block heading %}概览{% endblock %}
+
+{% block content %}
+
+<!-- ============ 关键指标 ============ -->
+<div class="stat-grid">
+  <div class="stat accent">
+    <div class="stat-label">制度文档</div>
+    <div class="stat-value">{{ kb_stats.document_count }}</div>
+    <div class="stat-sub">{{ kb_stats.ready_count }} 份就绪 · {{ kb_stats.failed_count }} 份失败</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">检索切片</div>
+    <div class="stat-value">{{ kb_stats.chunk_count }}</div>
+    <div class="stat-sub">
+      {% if kb_stats.vector_ready and kb_stats.vector_enabled %}
+        向量路已启用
+      {% elif kb_stats.vector_enabled %}
+        <span class="text-warning">向量路未就绪</span>
+      {% else %}
+        <span class="text-warning">纯 BM25 模式</span>
+      {% endif %}
+    </div>
+  </div>
+  <div class="stat {% if audit_stats.suspected_count > 0 %}warn{% endif %}">
+    <div class="stat-label">待复核问答</div>
+    <div class="stat-value">{{ audit_stats.suspected_count }}</div>
+    <div class="stat-sub">规则预筛命中 {{ audit_stats.flagged_total }} 条</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">今日问答</div>
+    <div class="stat-value">{{ audit_stats.today_count }}</div>
+    <div class="stat-sub">累计 {{ audit_stats.total_conversations }} 个会话</div>
+  </div>
+</div>
+
+<!-- ============ 提示词状态 ============ -->
+<div class="card mb-16">
+  <div class="card-head">
+    <h2>系统提示词</h2>
+    <span class="sub">当前生效版本 v{{ prompt.version if prompt else 0 }}</span>
+  </div>
+  <div class="card-body">
+    {% if prompt %}
+    <div class="alert alert-info">
+      管理员可在
+      <a href="/admin/prompts">提示词模板页</a>
+      修改正文部分，保存后立即对问答生效。强制规则段不可编辑——
+      它承载引用编号校验与拒答规则，删掉会破坏可追溯性。
+    </div>
+    {% else %}
+    <div class="alert alert-warning">
+      尚未配置提示词模板，系统正在使用代码内置的默认模板。
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- ============ 快捷入口 ============ -->
+<div class="grid-2">
+  <div class="card">
+    <div class="card-head"><h2>制度知识库</h2></div>
+    <div class="card-body">
+      <p class="text-muted text-sm mb-16">
+        上传或删除制度文档。文档变动后索引会立即重建，员工问答即刻生效。
+      </p>
+      <a class="btn btn-primary btn-sm" href="/admin/knowledge">管理知识库</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><h2>对话审计</h2></div>
+    <div class="card-body">
+      <p class="text-muted text-sm mb-16">
+        按员工与时间筛选问答记录，复核系统预筛出的疑似违规问题。
+      </p>
+      <a class="btn btn-primary btn-sm" href="/admin/audit">进入审计</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

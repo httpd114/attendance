@@ -1,0 +1,60 @@
+{% extends "admin_base.html" %}
+{% block title %}切片预览 · 制度知识库{% endblock %}
+{% block heading %}切片预览{% endblock %}
+
+{% block head_extra %}
+<a class="btn btn-ghost btn-sm" href="/admin/knowledge">← 返回知识库</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="card mb-16">
+  <div class="card-head">
+    <h2>{{ document.filename if document else '未知文档' }}</h2>
+    <span class="sub">
+      共 {{ total }} 块 · 第 {{ page }}/{{ total_pages }} 页
+      {% if document %} · 上传于 {{ document.created_at[:16].replace('T', ' ') }}{% endif %}
+    </span>
+  </div>
+  <div class="card-body">
+    <div class="alert alert-info">
+      切片质量直接决定问答准确度。重点检查：<strong>每块是否只讲一件事</strong>、
+      <strong>章节标题是否被正确识别</strong>、<strong>有没有把两章混进一块</strong>。
+    </div>
+  </div>
+</div>
+
+{% for c in chunks %}
+<div class="chunk-box">
+  <div class="chunk-head">
+    <span class="cell-mono">#{{ c.chunk_index }}</span>
+    <span class="tag tag-info">{{ c.section }}</span>
+    <span class="cell-muted">{{ c.content_len }} 字</span>
+    {% if c.has_embedding %}
+      <span class="tag tag-ok">已向量化</span>
+    {% else %}
+      <span class="tag tag-warn">无向量</span>
+    {% endif %}
+  </div>
+  <div class="preview">{{ c.content }}</div>
+</div>
+{% endfor %}
+
+{% if not chunks %}
+<div class="empty">该文档没有切片记录。</div>
+{% endif %}
+
+<!-- ============ 分页 ============ -->
+{% if total_pages > 1 %}
+<div class="pager">
+  {% if page > 1 %}
+    <a class="btn btn-ghost btn-sm" href="?page={{ page - 1 }}">上一页</a>
+  {% endif %}
+  <span class="text-muted text-sm">第 {{ page }} / {{ total_pages }} 页</span>
+  {% if page < total_pages %}
+    <a class="btn btn-ghost btn-sm" href="?page={{ page + 1 }}">下一页</a>
+  {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}

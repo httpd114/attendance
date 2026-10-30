@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>登录 · 制度助手</title>
+  <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body class="login-body">
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-brand">
+        <span class="brand-mark"></span>
+        <div>
+          <h1>制度助手</h1>
+          <p>派遣项目考勤异常双向确认系统</p>
+        </div>
+      </div>
+
+      {% if error %}
+      <div class="alert alert-error">{{ error }}</div>
+      {% endif %}
+
+      <form method="post" action="/login" autocomplete="off">
+        <label class="field">
+          <span class="field-label">用工单位</span>
+          <select name="tenant_code" class="input" required>
+            {% for t in tenants %}
+            <option value="{{ t.code }}" {% if t.code == default_tenant %}selected{% endif %}>
+              {{ t.name }}
+            </option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field-label">用户名</span>
+          <input type="text" name="username" class="input" required
+                 placeholder="请输入用户名" autofocus>
+        </label>
+
+        <label class="field">
+          <span class="field-label">密码</span>
+          <input type="password" name="password" class="input" required
+                 placeholder="请输入密码">
+        </label>
+
+        <button type="submit" class="btn btn-primary btn-block">登录</button>
+      </form>
+
+      <div class="login-hint">
+        <p>演示账号</p>
+        <ul>
+          <li><code>admin</code> / <code>Admin@2026</code>（管理员）</li>
+          <li><code>zhangsan</code> / <code>Emp@2026</code>（员工）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

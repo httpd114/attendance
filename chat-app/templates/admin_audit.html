@@ -1,0 +1,212 @@
+{% extends "admin_base.html" %}
+{% block title %}对话审计 · 管理后台{% endblock %}
+{% block heading %}对话审计{% endblock %}
+
+{% block content %}
+
+<!-- ============ 统计 ============ -->
+<div class="stat-grid mb-16">
+  <div class="stat {% if audit_stats.suspected_count > 0 %}warn{% endif %}">
+    <div class="stat-label">待复核</div>
+    <div class="stat-value">{{ audit_stats.suspected_count }}</div>
+    <div class="stat-sub">规则预筛命中，等待人工判定</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">累计命中</div>
+    <div class="stat-value">{{ audit_stats.flagged_total }}</div>
+    <div class="stat-sub">含已确认与已驳回</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">累计问答</div>
+    <div class="stat-value">{{ audit_stats.total_conversations }}</div>
+    <div class="stat-sub">今日提问 {{ audit_stats.today_count }} 条</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">管理动作</div>
+    <div class="stat-value">{{ action_logs|length }}</div>
+    <div class="stat-sub">最近 100 条操作留痕</div>
+  </div>
+</div>
+
+<!-- ============ 筛选栏 ============ -->
+<div class="card mb-16">
+  <div class="card-body">
+    <form class="filters" method="get" action="/admin/audit">
+      <label class="field">
+        <span class="field-label">关键词</span>
+        <input class="input" type="text" name="q" value="{{ q }}"
+               placeholder="问题内容 / 员工姓名">
+      </label>
+
+      <label class="field">
+        <span class="field-label">员工</span>
+        <select class="input" name="user_id">
+          <option value="">全部员工</option>
+          {% for u in users %}
+          <option value="{{ u.id }}" {% if u.id == user_id %}selected{% endif %}>
+            {{ u.display_name or u.username }}{% if u.employee_no %}（{{ u.employee_no }}）{% endif %}
+          </option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <label class="field">
+        <span class="field-label">预筛状态</span>
+        <select class="input" name="flag_status">
+          <option value="">全部记录</option>
+          <option value="suspected" {% if flag_status == 'suspected' %}selected{% endif %}>待复核</option>
+          <option value="confirmed" {% if flag_status == 'confirmed' %}selected{% endif %}>已确认违规</option>
+          <option value="rejected" {% if flag_status == 'rejected' %}selected{% endif %}>已驳回</option>
+          <option value="flagged" {% if flag_status == 'flagged' %}selected{% endif %}>仅看命中过的</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span class="field-label">起始日期</span>
+        <input class="input" type="date" name="date_from" value="{{ date_from }}">
+      </label>
+
+      <label class="field">
+        <span class="field-label">结束日期</span>
+        <input class="input" type="date" name="date_to" value="{{ date_to }}">
+      </label>
+
+      <div class="flex">
+        <button class="btn btn-primary btn-sm" type="submit">筛选</button>
+        <a class="btn btn-ghost btn-sm" href="/admin/audit">重置</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ 问答记录 ============ -->
+<div class="card mb-16">
+  <div class="card-head">
+    <h2>问答记录</h2>
+    <span class="sub">第 {{ page }} / {{ total_pages }} 页 · 共 {{ total }} 条</span>
+  </div>
+  <div class="card-body tight">
+    {% if not records %}
+    <div class="empty">没有符合条件的记录。换个筛选条件试试。</div>
+    {% else %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:110px">员工</th>
+            <th>问题内容</th>
+            <th style="width:100px">预筛</th>
+            <th style="width:140px">时间</th>
+            <th style="width:200px">复核操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for r in records %}
+          <tr>
+            <td>
+              <div class="cell-strong">{{ r.display_name or r.username or '—' }}</div>
+              <div class="cell-muted">{{ r.employee_no or r.username or '未知账号' }}</div>
+            </td>
+            <td>
+              {% if r.role == 'user' %}
+                <div class="cell-strong">{{ r.content }}</div>
+              {% else %}
+                <div class="cell-muted">（助手回答）{{ r.content[:60] }}{% if r.content|length > 60 %}…{% endif %}</div>
+              {% endif %}
+              {% if r.flag_reason %}
+              <div class="cell-muted text-warning">命中理由：{{ r.flag_reason }}</div>
+              {% endif %}
+              {% if r.flagged_by %}
+              <div class="cell-muted">复核人：{{ r.flagged_by }} · {{ r.reviewed_at[:16].replace('T', ' ') if r.reviewed_at else '' }}</div>
+              {% endif %}
+            </td>
+            <td>
+              {% if r.flag_status == 'suspected' %}
+                <span class="tag tag-warn">待复核</span>
+              {% elif r.flag_status == 'confirmed' %}
+                <span class="tag tag-danger">已确认</span>
+              {% elif r.flag_status == 'rejected' %}
+                <span class="tag tag-ok">已驳回</span>
+              {% else %}
+                <span class="tag tag-muted">—</span>
+              {% endif %}
+              {% if r.hit_rule %}
+              <div class="cell-muted">{{ r.hit_rule }}</div>
+              {% endif %}
+            </td>
+            <td class="cell-muted nowrap">{{ r.created_at[:16].replace('T', ' ') }}</td>
+            <td>
+              {% if r.flag_id %}
+              <form method="post" action="/admin/audit/flags/{{ r.flag_id }}/review"
+                    style="display:inline-flex;gap:6px;align-items:center">
+                <input class="input" type="text" name="reason"
+                       placeholder="复核意见" style="width:110px;padding:4px 8px;font-size:12px">
+                <button class="btn btn-danger btn-sm" type="submit" name="decision" value="confirmed">确认违规</button>
+                <button class="btn btn-ghost btn-sm" type="submit" name="decision" value="rejected">驳回</button>
+              </form>
+              {% else %}
+              <span class="text-muted text-sm">无需复核</span>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if total_pages > 1 %}
+  <div class="pager">
+    {% if page > 1 %}
+    <a class="btn btn-ghost btn-sm" href="{{ prev_url }}">上一页</a>
+    {% endif %}
+    <span>第 {{ page }} / {{ total_pages }} 页</span>
+    {% if page < total_pages %}
+    <a class="btn btn-ghost btn-sm" href="{{ next_url }}">下一页</a>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+
+<!-- ============ 管理动作日志 ============ -->
+<div class="card">
+  <div class="card-head">
+    <h2>管理动作日志</h2>
+    <span class="sub">谁在什么时候改了什么 · 审计留痕</span>
+  </div>
+  <div class="card-body tight">
+    {% if not action_logs %}
+    <div class="empty">暂无管理动作记录。</div>
+    {% else %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:130px">操作人</th>
+            <th style="width:140px">动作</th>
+            <th>详情</th>
+            <th style="width:150px">时间</th>
+            <th style="width:120px">来源 IP</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for log in action_logs %}
+          <tr>
+            <td class="cell-strong">{{ log.actor_name or '—' }}</td>
+            <td><span class="tag tag-info">{{ log.action }}</span></td>
+            <td class="cell-muted">
+              {% if log.detail %}{{ log.detail }}{% else %}{{ log.target_type }} {{ log.target_id }}{% endif %}
+            </td>
+            <td class="cell-muted nowrap">{{ log.created_at[:16].replace('T', ' ') }}</td>
+            <td class="cell-muted cell-mono">{{ log.ip or '—' }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

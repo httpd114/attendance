@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}管理后台{% endblock %}</title>
+  <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body class="admin-body">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-mark"></span>
+      <div>
+        <strong>制度助手</strong>
+        <small>管理后台</small>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="/admin" class="nav-item {% if active == 'home' %}active{% endif %}">
+        <span class="nav-dot"></span>概览
+      </a>
+      <a href="/admin/knowledge" class="nav-item {% if active == 'knowledge' %}active{% endif %}">
+        <span class="nav-dot"></span>制度知识库
+      </a>
+      <a href="/admin/prompts" class="nav-item {% if active == 'prompts' %}active{% endif %}">
+        <span class="nav-dot"></span>提示词模板
+      </a>
+      <a href="/admin/audit" class="nav-item {% if active == 'audit' %}active{% endif %}">
+        <span class="nav-dot"></span>对话审计
+      </a>
+      <a href="/admin/users" class="nav-item {% if active == 'users' %}active{% endif %}">
+        <span class="nav-dot"></span>用户管理
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="user-chip">
+        <span class="avatar">{{ user.display_name[0] if user.display_name else user.username[0] }}</span>
+        <div class="user-meta">
+          <strong>{{ user.display_name or user.username }}</strong>
+          <small>{{ '管理员' if user.is_admin else '员工' }} · {{ user.employee_no or '无工号' }}</small>
+        </div>
+      </div>
+      <a href="/logout" class="btn btn-ghost btn-sm btn-block">退出登录</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="content-head">
+      <h1>{% block heading %}{% endblock %}</h1>
+      <div class="content-head-right">{% block head_extra %}{% endblock %}</div>
+    </header>
+    <div class="content-body">
+      {% if flash %}
+      <div class="alert alert-{{ flash_type|default('info') }}">{{ flash }}</div>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+</body>
+</html>
