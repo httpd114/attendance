@@ -1,0 +1,139 @@
+<svg viewBox="0 0 680 1310" width="100%" role="img" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Microsoft YaHei', sans-serif">
+<title>派遣岗位需求单现状流程图（含判断点与分支）</title>
+<desc>岗位服务需求单现状流程，含 5 个菱形判断点与分支路径：变更是否留单、能否确认最新版本、是否同步最新技能要求、业务负责人是否确认、现场是否发现不一致；标注 5 个断点。</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<text x="40" y="30" font-size="15" font-weight="500" fill="#D3D1C7">岗位服务需求单 · 现状流程（As-Is，含判断点与分支）</text>
+
+<rect x="80" y="48" width="240" height="44" rx="22" fill="#2C2C2A" stroke="#888780" stroke-width="0.5"/>
+<text x="200" y="62" font-size="13" font-weight="500" fill="#D3D1C7" text-anchor="middle" dominant-baseline="central">客户提出或变更岗位需求</text>
+<text x="200" y="79" font-size="11" fill="#B4B2A9" text-anchor="middle" dominant-baseline="central">电话与群消息为主 · f10 f50</text>
+
+<path d="M200 92L200 106" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<polygon points="200,108 320,140 200,172 80,140" fill="#2C2C2A" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="200" y="140" font-size="13" font-weight="500" fill="#D3D1C7" text-anchor="middle" dominant-baseline="central">变更是否正式留单？</text>
+
+<path d="M320 140L378 140" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="349" y="133" font-size="11" fill="#B4B2A9" text-anchor="middle">否</text>
+<rect x="380" y="115" width="260" height="50" rx="8" fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="392" y="130" font-size="13" font-weight="500" fill="#D3D1C7" dominant-baseline="central">群消息口头答复，现场先解决</text>
+<text x="392" y="150" font-size="11" fill="#B4B2A9" dominant-baseline="central">林亦舟 · 先解决后补单 · f13</text>
+
+<path d="M510 165L510 188" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="380" y="190" width="260" height="50" rx="8" fill="#444441" stroke="#F09595" stroke-width="0.5"/>
+<text x="392" y="205" font-size="13" font-weight="500" fill="#F7C1C1" dominant-baseline="central">事后补填需求单表格</text>
+<text x="392" y="225" font-size="11" fill="#B4B2A9" dominant-baseline="central">回填时间被当作发生时间 · f13 · 断点 1</text>
+
+<path d="M200 172L200 283" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="214" y="228" font-size="11" fill="#B4B2A9">是</text>
+<path d="M510 240L510 310L322 310" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<rect x="80" y="285" width="240" height="50" rx="8" fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="92" y="300" font-size="13" font-weight="500" fill="#D3D1C7" dominant-baseline="central">三类工具分散登记</text>
+<text x="92" y="320" font-size="11" fill="#B4B2A9" dominant-baseline="central">服务台/台账/文件库 · 无统一编号 · f30</text>
+
+<path d="M200 335L200 350" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="80" y="352" width="240" height="50" rx="8" fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="92" y="367" font-size="13" font-weight="500" fill="#D3D1C7" dominant-baseline="central">人工跨工具比对找最新版本</text>
+<text x="92" y="387" font-size="11" fill="#B4B2A9" dominant-baseline="central">秦芮 · 版本断链已识别 · f33</text>
+
+<path d="M200 402L200 416" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<polygon points="200,418 320,450 200,482 80,450" fill="#2C2C2A" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="200" y="450" font-size="13" font-weight="500" fill="#D3D1C7" text-anchor="middle" dominant-baseline="central">能否确认最新版本？</text>
+
+<path d="M320 450L378 450" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="349" y="443" font-size="11" fill="#B4B2A9" text-anchor="middle">否</text>
+<rect x="380" y="425" width="260" height="50" rx="8" fill="#444441" stroke="#F09595" stroke-width="0.5"/>
+<text x="392" y="440" font-size="13" font-weight="500" fill="#F7C1C1" dominant-baseline="central">按文件名或时间戳猜「最新版」</text>
+<text x="392" y="460" font-size="11" fill="#B4B2A9" dominant-baseline="central">缺版本有效期+确认状态双条件 · f24 · 断点 2</text>
+
+<path d="M200 482L200 533" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="214" y="508" font-size="11" fill="#B4B2A9">是</text>
+<path d="M510 475L510 560L322 560" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<rect x="80" y="535" width="240" height="50" rx="8" fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="92" y="550" font-size="13" font-weight="500" fill="#D3D1C7" dominant-baseline="central">生成岗位交接单</text>
+<text x="92" y="570" font-size="11" fill="#B4B2A9" dominant-baseline="central">唐映秋 · 每次交接记录接收人与版本 f20</text>
+
+<path d="M200 585L200 599" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<polygon points="200,601 320,633 200,665 80,633" fill="#2C2C2A" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="200" y="633" font-size="13" font-weight="500" fill="#D3D1C7" text-anchor="middle" dominant-baseline="central">交接单同步了最新技能要求？</text>
+
+<path d="M320 633L378 633" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="349" y="626" font-size="11" fill="#B4B2A9" text-anchor="middle">否</text>
+<rect x="380" y="608" width="260" height="50" rx="8" fill="#444441" stroke="#F09595" stroke-width="0.5"/>
+<text x="392" y="623" font-size="13" font-weight="500" fill="#F7C1C1" dominant-baseline="central">交接单引用旧技能要求</text>
+<text x="392" y="643" font-size="11" fill="#B4B2A9" dominant-baseline="central">核心瓶颈 · f10 f11 · 断点 3</text>
+
+<path d="M200 665L200 706" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="214" y="686" font-size="11" fill="#B4B2A9">是</text>
+<path d="M510 658L510 700L322 700" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<rect x="80" y="708" width="240" height="50" rx="8" fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="92" y="723" font-size="13" font-weight="500" fill="#D3D1C7" dominant-baseline="central">一线专员提交变更</text>
+<text x="92" y="743" font-size="11" fill="#B4B2A9" dominant-baseline="central">可提交，无正式确认权 · f22</text>
+
+<path d="M200 758L200 772" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<polygon points="200,774 320,806 200,838 80,806" fill="#2C2C2A" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="200" y="806" font-size="13" font-weight="500" fill="#D3D1C7" text-anchor="middle" dominant-baseline="central">业务负责人是否正式确认？</text>
+
+<path d="M320 806L378 806" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="349" y="799" font-size="11" fill="#B4B2A9" text-anchor="middle">否</text>
+<rect x="380" y="781" width="260" height="50" rx="8" fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="392" y="796" font-size="13" font-weight="500" fill="#D3D1C7" dominant-baseline="central">挂起，退回补充</text>
+<text x="392" y="816" font-size="11" fill="#B4B2A9" dominant-baseline="central">未确认项不得归到对方名下 · f25</text>
+<path d="M450 781C400 760 355 742 322 731" fill="none" stroke="#F09595" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+
+<path d="M200 838L200 873" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="214" y="858" font-size="11" fill="#B4B2A9">是</text>
+
+<rect x="80" y="875" width="240" height="50" rx="8" fill="#444441" stroke="#F09595" stroke-width="0.5"/>
+<text x="92" y="890" font-size="13" font-weight="500" fill="#F7C1C1" dominant-baseline="central">到岗交接：只发「已处理」</text>
+<text x="92" y="910" font-size="11" fill="#B4B2A9" dominant-baseline="central">缺版本/未确认项/截止时间 · f23 · 断点 4</text>
+
+<path d="M200 925L200 939" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<polygon points="200,941 320,973 200,1005 80,973" fill="#2C2C2A" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="200" y="973" font-size="13" font-weight="500" fill="#D3D1C7" text-anchor="middle" dominant-baseline="central">现场是否发现条件不一致？</text>
+
+<path d="M320 973L378 973" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="349" y="966" font-size="11" fill="#B4B2A9" text-anchor="middle">否</text>
+<rect x="380" y="948" width="260" height="50" rx="8" fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="392" y="963" font-size="13" font-weight="500" fill="#D3D1C7" dominant-baseline="central">正常到岗，进入反馈</text>
+<text x="392" y="983" font-size="11" fill="#B4B2A9" dominant-baseline="central">叶书 · 对外承诺仍由业务人员确认 · f52</text>
+
+<path d="M200 1005L200 1048" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="214" y="1027" font-size="11" fill="#B4B2A9">是</text>
+
+<rect x="80" y="1050" width="240" height="50" rx="8" fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="92" y="1065" font-size="13" font-weight="500" fill="#D3D1C7" dominant-baseline="central">返工：回查原始版本、判责</text>
+<text x="92" y="1085" font-size="11" fill="#B4B2A9" dominant-baseline="central">重复澄清基线 22%（虚构样本）· f12 f15</text>
+
+<path d="M200 1100L200 1115" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M510 998L510 1142L322 1142" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<rect x="80" y="1117" width="240" height="50" rx="8" fill="#444441" stroke="#F09595" stroke-width="0.5"/>
+<text x="92" y="1132" font-size="13" font-weight="500" fill="#F7C1C1" dominant-baseline="central">投诉登记与周度复盘</text>
+<text x="92" y="1152" font-size="11" fill="#B4B2A9" dominant-baseline="central">审计只留摘要 · 只改模板 · f45 f54 · 断点 5</text>
+
+<path d="M200 1167L200 1181" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="80" y="1183" width="240" height="44" rx="22" fill="#2C2C2A" stroke="#888780" stroke-width="0.5"/>
+<text x="200" y="1197" font-size="13" font-weight="500" fill="#D3D1C7" text-anchor="middle" dominant-baseline="central">结束 · 进入下一批次需求</text>
+<text x="200" y="1214" font-size="11" fill="#B4B2A9" text-anchor="middle" dominant-baseline="central">试点边界：只读导出，不自动决定派遣资格 f05</text>
+
+<rect x="80" y="1248" width="14" height="14" rx="3" fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="102" y="1255" font-size="12" fill="#B4B2A9" dominant-baseline="central">常规步骤</text>
+<rect x="186" y="1248" width="14" height="14" rx="3" fill="#444441" stroke="#F09595" stroke-width="0.5"/>
+<text x="208" y="1255" font-size="12" fill="#B4B2A9" dominant-baseline="central">断点（问题发生处）</text>
+<polygon points="368,1248 376,1255 368,1262 360,1255" fill="#2C2C2A" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="386" y="1255" font-size="12" fill="#B4B2A9" dominant-baseline="central">判断点（分支）</text>
+<text x="80" y="1286" font-size="11" fill="#888780">依据 discovery-report.md 六视角访谈事实绘制；证据为合成演练，待业务日志与真实样本交叉验证</text>
+</svg>
