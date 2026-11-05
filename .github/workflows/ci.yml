@@ -12,8 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      # requirements.txt 精确锁定的 numpy 2.5.x 要求 Python >=3.12，
+      # 因此固定组合只在已验证的 3.13 上跑；3.11 的可安装性由
+      # pyproject.toml 的宽松下限（pip install -e .）保证，不在本 CI 覆盖范围。
       matrix:
-        python-version: ["3.11", "3.13"]
+        python-version: ["3.13"]
 
     steps:
       - uses: actions/checkout@v4

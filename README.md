@@ -14,8 +14,11 @@
 
 ### 1. 环境要求
 
-Python 3.11+（开发与验证环境为 3.13）。SQLite 内置，无需额外数据库服务。
+Python 3.11+（开发与 CI 验证环境为 3.13）。SQLite 内置，无需额外数据库服务。
 LLM 与向量服务当前对接智谱开放平台，需要一组可用的 API Key。
+
+> `requirements.txt` 精确锁定的 `numpy 2.5.x` 要求 Python ≥3.12；在 3.11 环境下请改用
+> `pip install -e .`，由 pip 按 `pyproject.toml` 的宽松下限解析兼容版本。CI 只覆盖 3.13。
 
 ### 2. 安装
 
