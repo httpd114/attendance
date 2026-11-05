@@ -1,0 +1,67 @@
+# 非机密默认参数（文档性质）
+#
+# ⚠️ 程序目前**不会自动加载本文件**：所有配置由环境变量读入
+#    （core/rag_engine.py 的 Config.from_env、core/auth.py、main.py）。
+#    本文件的用途是给运维一份「默认值清单」，便于评审与做成配置中心模板。
+# ⚠️ 严禁在此写入 API Key、JWT_SECRET、AGENT_GATE_SECRET 等机密。
+#    机密走环境变量或密钥管理服务，见 README.md 与上线前检查清单 A4。
+
+app:
+  name: "派遣项目考勤异常双向确认系统"
+  host: "127.0.0.1"          # HOST；生产由反向代理暴露，不要直接改 0.0.0.0
+  port: 8000                  # PORT
+  log_level: "info"
+
+llm:
+  base_url_env: "LLM_BASE_URL"
+  api_key_env: "LLM_API_KEY" # 只记录变量名，不记录值
+  model: "glm-4-flash"        # LLM_MODEL
+  temperature: 0.1
+  max_tokens: 800
+  timeout_seconds: 60         # LLM_TIMEOUT
+  max_agent_rounds: 5         # Agent Harness 决策轮次硬上限
+
+embedding:
+  provider: "zhipu"           # EMBED_PROVIDER
+  model: "embedding-2"        # EMBED_MODEL
+  dimension: 1024             # EMBED_DIM
+
+retrieval:
+  chunk_size: 500             # CHUNK_SIZE，按 Markdown 标题切节后再细分
+  chunk_overlap: 50
+  top_k: 3                    # TOP_K
+  history_rounds: 6           # HISTORY_ROUNDS
+  history_char_limit: 3000
+  hybrid: "bm25 + char_bigram_bm25 + vector, 融合方式 RRF"
+
+paths:
+  document: "data/报销制度.md"     # DOC_PATH
+  database: "data/chat.db"         # DB_PATH
+  index_cache: "data/.rag_cache"   # INDEX_DIR
+  static: "src/attendance_agent/static"
+  templates: "src/attendance_agent/templates"
+
+security:
+  jwt_expire_hours: 12
+  capability_token_ttl_seconds: 300
+  rate_limit_max_calls: 20
+  rate_limit_window_seconds: 60
+  rate_limit_key: "user_id"       # 进程内滑动窗口；多 worker 需换共享计数
+  # 生产必填（缺失即拒绝启动，当前版本尚未实现该强校验）：
+  required_env:
+    - "JWT_SECRET"
+    - "AGENT_GATE_SECRET"
+    - "LLM_API_KEY"
+
+audit:
+  prescreen_min_weight: 2         # 低于此权重不推预警，避免噪音淹没管理员
+  prescreen_status: "suspected"   # 只召回不定性，必须人工复核
+  result_summary_limit: 240
+  token_log_mode: "sha256[:8] 指纹"
+  # ⚠️ 日志保留策略尚未实现，见上线前检查清单 A3
+  retention_policy: "未配置（P0 阻塞）"
+
+business:
+  max_claimed_minutes: 240        # 单次加班申报上限
+  auto_approve_on_timeout: false  # 超时绝不自动通过，必须升级上报
+  settlement_scope: "一期只记录并导出，不直连薪资、不开票"

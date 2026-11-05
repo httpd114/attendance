@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: 静态自检 (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 全量构建自检
+        # 不需要服务、网络或 API Key：语法检查 + 路由自检 + 用例集自检
+        # + 核心单测 + Agent 三条轨迹与硬门禁单测
+        run: bash scripts/build.sh
+
+      - name: 确认工程文件齐全
+        run: |
+          for f in README.md LICENSE CHANGELOG.md CONTRIBUTING.md \
+                   requirements.txt pyproject.toml .gitignore \
+                   config/default.yaml docs/design.md docs/api.md; do
+            test -f "$f" || { echo "缺少 $f"; exit 1; }
+          done

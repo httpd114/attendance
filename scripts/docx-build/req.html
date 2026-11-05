@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><title>派遣项目考勤异常双向确认系统 · 需求清单</title>
+<style>
+  body { font-family: "Microsoft YaHei", "PingFang SC", "SimSun", sans-serif;
+         font-size: 10.5pt; line-height: 1.68; color: #1a1a1a; }
+  h1 { font-size: 19pt; font-weight: 700; color: #12395B; margin: 0 0 6pt 0;
+       border-bottom: 2px solid #12395B; padding-bottom: 8pt; }
+  h2 { font-size: 14pt; font-weight: 700; color: #12395B; margin: 18pt 0 7pt 0;
+       border-left: 4px solid #12395B; padding-left: 8pt; }
+  h3 { font-size: 12pt; font-weight: 700; color: #1F5C8B; margin: 12pt 0 5pt 0; }
+  p  { margin: 0 0 7pt 0; text-align: justify; }
+  table { border-collapse: collapse; width: 100%; margin: 8pt 0 12pt 0; font-size: 9pt; }
+  th { background: #12395B; color: #ffffff; font-weight: 700;
+       border: 1px solid #12395B; padding: 5pt 6pt; text-align: left; }
+  td { border: 1px solid #B8C4CE; padding: 5pt 6pt; vertical-align: top; }
+  tr:nth-child(even) td { background: #F4F7FA; }
+  blockquote { margin: 8pt 0 11pt 0; padding: 8pt 12pt;
+               background: #F5F7F9; border-left: 3px solid #7A9BB8; color: #33475B; }
+  blockquote p { margin: 0 0 4pt 0; }
+  pre { background: #F4F6F8; border: 1px solid #D8E0E6; padding: 8pt 10pt;
+        font-family: "Consolas", monospace; font-size: 8.5pt;
+        white-space: pre-wrap; margin: 8pt 0 12pt 0; }
+  code { font-family: "Consolas", monospace; font-size: 9pt; background: #EEF2F5; padding: 1pt 3pt; }
+  ul, ol { margin: 5pt 0 10pt 0; padding-left: 20pt; }
+  li { margin: 0 0 3pt 0; }
+  hr { border: none; border-top: 1px solid #C9D4DC; margin: 14pt 0; }
+  em { font-style: italic; color: #666; }
+</style>
+</head><body>
+<h1>派遣项目考勤异常双向确认系统 · 需求清单 v0.1</h1>
+<blockquote><p>状态：骨架已确认（Q1/Q4/Q5/Q7），其余为架构师推荐默认，待客户最终确认。</p><p>版本：2026-10-30　|　角色：需求评审（十年企业 IS 架构经验）</p></blockquote>
+<hr/>
+<h2>1. 业务目标</h2>
+<ul><li><strong>一句话</strong>：让"考勤异常"在派遣员工与用工单位管理员之间完成<strong>可追溯的双向确认</strong>，消除口头扯皮与责任不清。</li><li><strong>核心价值</strong>：异常不落地为确认记录 = 薪资/结算争议源头。系统把"谁在何时确认了哪个版本的异常"固化下来。</li><li><strong>一期不追求</strong>：自动算薪、自动开票、复杂申诉仲裁。</li></ul>
+<hr/>
+<h2>2. 范围边界</h2>
+<p><strong>范围内（In）</strong></p>
+<ul><li>考勤异常的<strong>生成 → 员工确认/异议 → 管理员复核 → 关闭</strong>全流程。</li><li>多租户（用工单位隔离）、全链路审计、脱敏导出。</li><li>异常数据<strong>导出为结算清单</strong>（不直接写薪资系统）。</li></ul>
+<p><strong>范围外（Out，一期不做）</strong></p>
+<ul><li>直连薪资/服务费结算、自动开票、报销触发。</li><li>设备直连（闸机/人脸 SDK）、实时事件总线。</li><li>复杂申诉工单、2×2 双向独立一致矩阵。</li><li>多活/容灾（二期）。</li></ul>
+<hr/>
+<h2>3. 关键设计决策（已确认 + 默认）</h2>
+<table>
+<tr><th>编号</th><th>决策项</th><th>结论</th><th>架构影响</th></tr>
+<tr><td>Q4</td><td>主体隔离</td><td><strong>多租户，用工单位为租户边界</strong>；派遣公司跨租户只读监管；员工仅本人数据</td><td>租户 ID 贯穿全表 + 行级隔离 + RBAC</td></tr>
+<tr><td>Q5</td><td>部署</td><td><strong>MVP SaaS 多租户试点；二期支持私有化交付包</strong>（离线 License）</td><td>云原生 K8s；二期预留私有化安装与离线认证</td></tr>
+<tr><td>Q1</td><td>确认语义</td><td><strong>线性推进 + 员工可异议</strong>；管理员复核为终态</td><td>状态机：待确认→员工确认/异议→管理员复核→已确认/已关闭</td></tr>
+<tr><td>Q7</td><td>结算边界</td><td><strong>一期仅记录 + 导出结算数据</strong>；不直连薪资、不开票</td><td>系统闭环，无下游强一致依赖</td></tr>
+<tr><td>Q2</td><td>数据源</td><td><strong>默认：批量文件导入（Excel/CSV 打卡导出）+ 预留 API 适配器</strong>；不做设备直连</td><td>定时 ETL + 文件解析；适配器接口预留</td></tr>
+<tr><td>Q3</td><td>规则可配</td><td><strong>管理员可配置（元数据驱动）+ 规则版本快照</strong>；不引规则引擎</td><td>规则配置界面 + 规则版本表（历史判定可回溯）</td></tr>
+<tr><td>Q6</td><td>时限/超时</td><td><strong>有时限（默认 3 工作日）+ 超时升级上报，绝不自动通过</strong></td><td>定时扫描 + 升级通知（轻量，非全 BPMN）</td></tr>
+<tr><td>Q8</td><td>触达入口</td><td><strong>MVP：短信链接 + Web 确认（一次性令牌防冒领）</strong>；二期按租户接企微/钉钉</td><td>短信网关 + 短链 + OTP；IM 集成放二期</td></tr>
+<tr><td>Q9</td><td>合规/审计</td><td><strong>全链路审计（谁查哪条、哪版确认）+ 留存≥2 年 + 脱敏导出审批</strong></td><td>不可篡改审计表 + 脱敏引擎 + 导出审批流</td></tr>
+<tr><td>Q10</td><td>规模/节奏</td><td><strong>一期单客户 ≤2000 员工验证；架构按万级预留（读写分离/缓存）但不一期实现</strong></td><td>单体 + 单库起步；预留分片与缓存点</td></tr>
+</table>
+<blockquote><p>标注「默认」的六项为用户授权架构师按合理实践填写，列为待决项（见 §6），客户确认后转为「已确认」。</p></blockquote>
+<hr/>
+<h2>4. 核心状态机（一期）</h2>
+<pre>[异常生成] → (待确认)
+   ├─ 员工确认 ──────────────┐
+   └─ 员工异议 ─→ (复核中) ──┤
+                              ↓
+                  [管理员复核] → 确认/驳回
+                              ↓
+                        (已关闭 / 终态)
+超时(3工作日未确认) → 升级上报用工单位管理员（不自动通过）</pre>
+<hr/>
+<h2>5. 非功能基线（一期目标）</h2>
+<ul><li><strong>安全</strong>：租户间数据严格隔离；员工确认用一次性令牌，防冒领/重放。</li><li><strong>合规</strong>：考勤属个人信息，按《个保法》留痕 + 脱敏导出审批；留存≥2 年。</li><li><strong>审计</strong>：每次查看/确认/复核记录操作人、时间、数据版本，不可篡改。</li><li><strong>性能</strong>：≤2000 人单租户下，异常列表与确认操作 P95 &lt; 1s；批量导入支持万行级。</li><li><strong>可用</strong>：一期单实例，目标 99.5%；多活/容灾二期。</li><li><strong>可运维</strong>：SaaS 自助开通 + 标准灰度升级；私有化二期提供离线升级包。</li></ul>
+<hr/>
+<h2>6. 待决项 / 开放问题</h2>
+<ol><li><strong>Q2 数据源</strong>：首个客户考勤数据实际格式？是否已有第三方 HR 接口可复用？</li><li><strong>Q3 规则</strong>：各用工单位异常规则差异有多大？是否需要"规则按项目覆盖"？</li><li><strong>Q6 时限</strong>：3 个工作日是否覆盖所有异常类型？超时升级到哪一级？</li><li><strong>Q8 触达</strong>：员工是否普遍有手机号可用？企微/钉钉归属派遣公司还是用工单位？</li><li><strong>Q9 合规</strong>：客户是否有指定留存年限 / 等保级别要求？</li><li><strong>Q10 规模</strong>：试点客户实际员工数与项目数？是否有明确上线 deadline？</li><li><strong>跨项</strong>：异议复核的时限与终裁人是否和管理员为同一角色？</li></ol>
+<hr/>
+<p><em>本清单为 v0.1，待 Q2/Q3/Q6/Q8/Q9/Q10 客户确认后升级为 v1.0，再进入技术方案设计。</em></p>
+</body></html>

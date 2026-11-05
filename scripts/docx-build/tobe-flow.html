@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<style>
+  html,body{margin:0;padding:0;background:#ffffff;}
+  #c{width:1600px;height:1390px;}
+  text{font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;}
+</style>
+</head>
+<body>
+<div id="c">
+<svg viewBox="0 0 1600 1390" width="1600" height="1390" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<text x="120" y="58" font-size="25" font-weight="700" fill="#111827">AI 数智化后的岗位服务需求单流程（To-Be）</text>
+<text x="120" y="88" font-size="13.5" fill="#6B7280">针对现状 5 个断点重设：补单留痕 → 证据锚定 → 双条件判版 → 具名审批 → 全程审计；只读接入，不自动决定派遣资格</text>
+
+<rect x="120" y="140" width="560" height="54" rx="27" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+<text x="140" y="158" font-size="15" font-weight="700" fill="#2C2C2A">客户提出或变更岗位需求</text>
+<text x="140" y="181" font-size="12" fill="#5F5E5A">三入口：电话 · 群消息 · 正式需求单 · f01 f10</text>
+
+<path d="M400 194L400 220" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+
+<polygon points="400,224 680,262 400,300 120,262" fill="#FAEEDA" stroke="#854F0B" stroke-width="1"/>
+<text x="400" y="262" font-size="15" font-weight="700" fill="#633806" text-anchor="middle" dominant-baseline="central">变更是否在 2 小时内补单？</text>
+
+<path d="M680 262L736 262" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="706" y="253" font-size="12" fill="#6B7280" text-anchor="middle">否</text>
+<rect x="740" y="233" width="620" height="58" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<text x="760" y="252" font-size="15" font-weight="700" fill="#791F1F">超时：升级业务负责人，暂停该岗位交接</text>
+<text x="760" y="275" font-size="12" fill="#791F1F">先暂停、不默认放行，避免旧条件继续流转 · f44</text>
+
+<path d="M400 300L400 326" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="414" y="318" font-size="12" fill="#6B7280">是</text>
+<path d="M1050 291L1050 359L684 359" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+
+<rect x="120" y="330" width="560" height="58" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="140" y="349" font-size="15" font-weight="700" fill="#0C447C">统一编号登记 · 双时间轴入库</text>
+<text x="140" y="372" font-size="12" fill="#185FA5">业务发生时间 / 系统接收时间 / 确认状态三者分离 · f30 f34</text>
+<rect x="594" y="338" width="74" height="22" rx="11" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="631" y="349" font-size="11.5" font-weight="700" fill="#3B6D11" text-anchor="middle" dominant-baseline="central">解断点 1</text>
+
+<path d="M400 388L400 414" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+
+<rect x="120" y="418" width="560" height="58" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="140" y="437" font-size="15" font-weight="700" fill="#085041">证据锚定抽取 · 一页缺项清单</text>
+<text x="140" y="460" font-size="12" fill="#0F6E56">每字段回填源文件字符位置；无法锚定即转人工，不写入 · f15 f42</text>
+
+<path d="M400 476L400 502" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+
+<polygon points="400,506 680,544 400,582 120,544" fill="#FAEEDA" stroke="#854F0B" stroke-width="1"/>
+<text x="400" y="544" font-size="15" font-weight="700" fill="#633806" text-anchor="middle" dominant-baseline="central">关键字段是否全部锚定？</text>
+
+<path d="M680 544L736 544" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="706" y="535" font-size="12" fill="#6B7280" text-anchor="middle">否</text>
+<rect x="740" y="515" width="620" height="58" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="760" y="534" font-size="15" font-weight="700" fill="#3C3489">人工核查队列（具名接收人）</text>
+<text x="760" y="557" font-size="12" fill="#534AB7">缺口清单 + 来源位置一并提交，不生成交接单 · f44</text>
+
+<path d="M400 582L400 608" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="414" y="600" font-size="12" fill="#6B7280">是</text>
+<path d="M1050 573L1050 641L684 641" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+
+<rect x="120" y="612" width="560" height="58" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="140" y="631" font-size="15" font-weight="700" fill="#085041">版本双条件判定</text>
+<text x="140" y="654" font-size="12" fill="#0F6E56">版本有效期 AND 确认状态；文件名与戳记不参与判定 · f24</text>
+<rect x="594" y="620" width="74" height="22" rx="11" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="631" y="631" font-size="11.5" font-weight="700" fill="#3B6D11" text-anchor="middle" dominant-baseline="central">解断点 2</text>
+
+<path d="M400 670L400 696" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+
+<polygon points="400,700 680,738 400,776 120,738" fill="#FAEEDA" stroke="#854F0B" stroke-width="1"/>
+<text x="400" y="738" font-size="15" font-weight="700" fill="#633806" text-anchor="middle" dominant-baseline="central">是否已存在确认的新版本？</text>
+
+<path d="M680 738L736 738" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="706" y="729" font-size="12" fill="#6B7280" text-anchor="middle">是</text>
+<rect x="740" y="709" width="620" height="58" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="760" y="728" font-size="15" font-weight="700" fill="#0C447C">旧版本标记作废 · 交接单强制刷新</text>
+<text x="760" y="751" font-size="12" fill="#185FA5">保留作废原因；过期来源不得覆盖已确认版本 · f34</text>
+
+<path d="M400 776L400 802" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="414" y="794" font-size="12" fill="#6B7280">否</text>
+<path d="M1050 767L1050 835L684 835" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+
+<rect x="120" y="806" width="560" height="58" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="140" y="825" font-size="15" font-weight="700" fill="#085041">生成岗位交接单</text>
+<text x="140" y="848" font-size="12" fill="#0F6E56">最新版本 + 未确认项 + 截止时间，三项缺一不发 · f23</text>
+<rect x="572" y="814" width="96" height="22" rx="11" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="620" y="825" font-size="11.5" font-weight="700" fill="#3B6D11" text-anchor="middle" dominant-baseline="central">解断点 3·4</text>
+
+<path d="M400 864L400 890" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+
+<polygon points="400,894 680,932 400,970 120,932" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="400" y="932" font-size="15" font-weight="700" fill="#3C3489" text-anchor="middle" dominant-baseline="central">业务负责人是否确认（具名）？</text>
+
+<path d="M680 932L736 932" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="706" y="923" font-size="12" fill="#6B7280" text-anchor="middle">否</text>
+<rect x="740" y="903" width="620" height="58" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<text x="760" y="922" font-size="15" font-weight="700" fill="#791F1F">退回补充，记录退回人与时间</text>
+<text x="760" y="945" font-size="12" fill="#791F1F">未确认项不得归到对方名下；退回动作同样留痕 · f25</text>
+
+<path d="M400 970L400 996" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="414" y="988" font-size="12" fill="#6B7280">是</text>
+<path d="M1050 961L1050 1029L684 1029" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+
+<rect x="120" y="1000" width="560" height="58" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="140" y="1019" font-size="15" font-weight="700" fill="#0C447C">交接单发布 · 接收人签收</text>
+<text x="140" y="1042" font-size="12" fill="#185FA5">接收人、版本、未结项全部落库，可反查 · f20 f45</text>
+
+<path d="M400 1058L400 1084" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+
+<polygon points="400,1088 680,1126 400,1164 120,1126" fill="#FAEEDA" stroke="#854F0B" stroke-width="1"/>
+<text x="400" y="1126" font-size="15" font-weight="700" fill="#633806" text-anchor="middle" dominant-baseline="central">现场是否发现条件不一致？</text>
+
+<path d="M680 1126L736 1126" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="706" y="1117" font-size="12" fill="#6B7280" text-anchor="middle">是</text>
+<rect x="740" y="1097" width="620" height="58" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<text x="760" y="1116" font-size="15" font-weight="700" fill="#791F1F">差异登记 · 版本回滚</text>
+<text x="760" y="1139" font-size="12" fill="#791F1F">不再靠人脑记忆回溯，差异本身成为下一轮输入 · f11</text>
+
+<path d="M400 1164L400 1190" fill="none" stroke="#6B7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="414" y="1182" font-size="12" fill="#6B7280">否</text>
+
+<rect x="120" y="1194" width="560" height="58" rx="29" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+<text x="140" y="1213" font-size="15" font-weight="700" fill="#0C447C">审计留痕 + 周度复盘</text>
+<text x="140" y="1236" font-size="12" fill="#185FA5">误报 / 漏报 / 未确认项共同复盘，只改模板不算收口 · f45 f55</text>
+
+<path d="M1050 1155L1050 1272L60 1272L60 641L116 641" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="7 5" marker-end="url(#ar)"/>
+<text x="78" y="1258" font-size="12" fill="#A32D2D">回滚后重新判定</text>
+
+<rect x="120" y="1300" width="1240" height="36" rx="6" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1"/>
+<text x="140" y="1318" font-size="12.5" fill="#444441" dominant-baseline="central">横切能力 · 全流程审计留痕：谁查过 · 用哪个版本 · 提出什么建议 · 谁确认（f45）｜只读导出，写回、外部消息与执行接口均不开放（f32）</text>
+
+<rect x="120" y="1352" width="18" height="18" rx="9" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="146" y="1361" font-size="12.5" fill="#444441" dominant-baseline="central">解决断点</text>
+<rect x="250" y="1352" width="18" height="18" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="276" y="1361" font-size="12.5" fill="#444441" dominant-baseline="central">流程步骤</text>
+<rect x="378" y="1352" width="18" height="18" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<text x="404" y="1361" font-size="12.5" fill="#444441" dominant-baseline="central">AI 自动化环节</text>
+<polygon points="534,1351 543,1361 534,1371 525,1361" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.8"/>
+<text x="552" y="1361" font-size="12.5" fill="#444441" dominant-baseline="central">判断点</text>
+<polygon points="632,1351 641,1361 632,1371 623,1361" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+<text x="650" y="1361" font-size="12.5" fill="#444441" dominant-baseline="central">人工审批点</text>
+<rect x="748" y="1352" width="18" height="18" rx="3" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.8"/>
+<text x="774" y="1361" font-size="12.5" fill="#444441" dominant-baseline="central">异常 / 超时路径</text>
+</svg>
+</div>
+</body>
+</html>

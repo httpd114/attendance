@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "attendance-agent"
+version = "0.1.0"
+description = "派遣项目考勤异常双向确认系统：制度 RAG 问答 + 管理后台 + 带硬门禁的 Agent 编排"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+
+# 这里是「可安装性」下限；精确可复现版本见 requirements.txt。
+# 两份清单的取舍是刻意的：库作者不该把使用者锁死在补丁版本上，
+# 但交付项目必须能重现上一个已验证的运行组合。
+dependencies = [
+    "fastapi>=0.143",
+    "starlette>=1.7",
+    "pydantic>=2.14",
+    "uvicorn>=0.54",
+    "jinja2>=3.1",
+    "python-multipart>=0.0.32",
+    "bcrypt>=4.0",
+    "PyJWT>=2.15",
+    "requests>=2.34",
+    "faiss-cpu>=1.15",
+    "numpy>=2.0",
+    "jieba>=0.42",
+    "rank_bm25>=0.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=9.0", "ruff>=0.6"]
+local-embed = ["fastembed>=0.9"]
+pdf = ["pypdf>=6.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["attendance_agent*"]
+
+# static/ 与 templates/ 是应用运行必需的资源，必须随包一起分发，
+# 否则 pip install 后 Jinja2Templates 会找不到模板目录。
+[tool.setuptools.package-data]
+"attendance_agent" = ["static/*", "templates/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-q"
