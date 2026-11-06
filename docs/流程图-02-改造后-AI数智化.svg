@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="2000" viewBox="0 0 1680 2000" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,sans-serif">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#6B7280" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#639922" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect x="0" y="0" width="1680" height="2000" fill="#FFFFFF"/>
+<text x="70" y="52" font-size="29" fill="#111827" font-weight="700" text-anchor="start">图 2 · 改造后：AI 数智化后的岗位服务需求单流程（To-Be）</text>
+<text x="70" y="86" font-size="14.5" fill="#6B7280" font-weight="400" text-anchor="start">5 处断点逐一关闭：补单留痕 → 证据锚定 → 双条件判版 → 具名审批 → 全程审计；只读接入，不自动决定派遣资格</text>
+<text x="70" y="112" font-size="12.5" fill="#9CA3AF" font-weight="400" text-anchor="start">依据：派遣业务 AI 数智化需求分析方案 v1.0 §3.2（AI-01~AI-10）/ §4.2 红线 / §4.4 状态机 · To-Be 流程图 v1 · 上线交付运行手册 HC 控制点</text>
+<path d="M70 132L1610 132" fill="none" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="95" y="168" width="790" height="62" rx="9" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.2"/>
+<text x="115" y="194" font-size="16.5" fill="#2C2C2A" font-weight="700" text-anchor="start">三入口统一接入（电话 / 群消息 / 正式需求单）</text>
+<text x="115" y="216" font-size="12.5" fill="#5F5E5A" font-weight="400" text-anchor="start">所有变更先有登记入口，不再让系统最后一个知道 · f01 f10</text>
+<circle cx="70" cy="199.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="203.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">1</text>
+<path d="M490.0 232L490.0 247" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<polygon points="490.0,254.0 770.0,292.0 490.0,330.0 210.0,292.0" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="490.0" y="297.0" font-size="15.5" fill="#633806" font-weight="700" text-anchor="middle">变更是否在规定时限补单？</text>
+<circle cx="70" cy="292.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="296.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">2</text>
+<path d="M772.0 292.0L906 292.0" fill="none" stroke="#A32D2D" stroke-width="1.4" stroke-dasharray="5,4"/>
+<path d="M908 292.0L926 292.0" fill="none" stroke="#A32D2D" stroke-width="1.6" marker-end="url(#arr)"/>
+<text x="870" y="282.0" font-size="12" fill="#6B7280" font-weight="400" text-anchor="middle">否</text>
+<rect x="930" y="250.0" width="660" height="84" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1.2"/>
+<text x="950" y="276.0" font-size="15" fill="#791F1F" font-weight="700" text-anchor="start">超时升级业务负责人，暂停该岗位交接</text>
+<text x="950" y="298.0" font-size="12" fill="#A32D2D" font-weight="400" text-anchor="start">先暂停、不默认放行，避免旧条件继续流转 · f44 · R-05</text>
+<path d="M490.0 332L490.0 347" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="354" width="790" height="62" rx="9" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="115" y="380" font-size="16.5" fill="#085041" font-weight="700" text-anchor="start">统一编号登记 · 双时间轴入库</text>
+<text x="115" y="402" font-size="12.5" fill="#0F6E56" font-weight="400" text-anchor="start">业务发生时间 / 系统接收时间 / 确认状态三者分离；有效性判定用规则不用模型 · f30 f34</text>
+<circle cx="70" cy="385.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="389.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">3</text>
+<rect x="755" y="360" width="118" height="23" rx="11.5" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="814.0" y="375.5" font-size="11.5" fill="#3B6D11" font-weight="700" text-anchor="middle">解断点 1 · AI-03</text>
+<path d="M490.0 418L490.0 433" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="440" width="790" height="62" rx="9" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="115" y="466" font-size="16.5" fill="#085041" font-weight="700" text-anchor="start">证据锚定抽取 → 一页缺项清单</text>
+<text x="115" y="488" font-size="12.5" fill="#0F6E56" font-weight="400" text-anchor="start">六项关键字段逐条回填来源文件 + 原文字符区间，不输出长摘要 · f15 f42</text>
+<circle cx="70" cy="471.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="475.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">4</text>
+<rect x="755" y="446" width="118" height="23" rx="11.5" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="814.0" y="461.5" font-size="11.5" fill="#3B6D11" font-weight="700" text-anchor="middle">AI-01</text>
+<path d="M490.0 504L490.0 519" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<polygon points="490.0,526.0 770.0,564.0 490.0,602.0 210.0,564.0" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="490.0" y="569.0" font-size="15.5" fill="#633806" font-weight="700" text-anchor="middle">关键字段是否全部锚定？</text>
+<circle cx="70" cy="564.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="568.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">5</text>
+<path d="M772.0 564.0L906 564.0" fill="none" stroke="#A32D2D" stroke-width="1.4" stroke-dasharray="5,4"/>
+<path d="M908 564.0L926 564.0" fill="none" stroke="#A32D2D" stroke-width="1.6" marker-end="url(#arr)"/>
+<text x="870" y="554.0" font-size="12" fill="#6B7280" font-weight="400" text-anchor="middle">否</text>
+<rect x="930" y="522.0" width="660" height="84" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1.2"/>
+<text x="950" y="548.0" font-size="15" fill="#791F1F" font-weight="700" text-anchor="start">人工核查队列（具名接收人）</text>
+<text x="950" y="570.0" font-size="12" fill="#A32D2D" font-weight="400" text-anchor="start">缺口清单 + 来源位置一并提交，不生成交接单 · f44 · AI-01 门禁</text>
+<path d="M490.0 604L490.0 619" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="626" width="790" height="62" rx="9" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="115" y="652" font-size="16.5" fill="#085041" font-weight="700" text-anchor="start">版本双条件判定</text>
+<text x="115" y="674" font-size="12.5" fill="#0F6E56" font-weight="400" text-anchor="start">版本有效期 AND 确认状态；文件名与时间戳不参与判定 · f24（G0 条件准入）</text>
+<circle cx="70" cy="657.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="661.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">6</text>
+<rect x="755" y="632" width="118" height="23" rx="11.5" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="814.0" y="647.5" font-size="11.5" fill="#3B6D11" font-weight="700" text-anchor="middle">解断点 2 · AI-02</text>
+<path d="M490.0 690L490.0 705" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<polygon points="490.0,712.0 770.0,750.0 490.0,788.0 210.0,750.0" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="490.0" y="755.0" font-size="15.5" fill="#633806" font-weight="700" text-anchor="middle">是否已存在确认的新版本？</text>
+<circle cx="70" cy="750.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="754.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">7</text>
+<path d="M772.0 750.0L906 750.0" fill="none" stroke="#639922" stroke-width="1.4" stroke-dasharray="5,4"/>
+<path d="M908 750.0L926 750.0" fill="none" stroke="#639922" stroke-width="1.6" marker-end="url(#arg)"/>
+<text x="870" y="740.0" font-size="12" fill="#6B7280" font-weight="400" text-anchor="middle">是</text>
+<rect x="930" y="708.0" width="660" height="84" rx="8" fill="#EAF3DE" stroke="#639922" stroke-width="1.2"/>
+<text x="950" y="734.0" font-size="15" fill="#3B6D11" font-weight="700" text-anchor="start">旧版本标记作废 · 交接单强制刷新</text>
+<text x="950" y="756.0" font-size="12" fill="#639922" font-weight="400" text-anchor="start">保留作废原因，过期来源不得覆盖已确认版本 · f34</text>
+<path d="M490.0 790L490.0 805" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="812" width="790" height="62" rx="9" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="115" y="838" font-size="16.5" fill="#085041" font-weight="700" text-anchor="start">生成岗位交接单</text>
+<text x="115" y="860" font-size="12.5" fill="#0F6E56" font-weight="400" text-anchor="start">最新版本 + 未确认项 + 截止时间，三项缺一不发 · f23；变更影响清单只给候选不判责 · AI-02</text>
+<circle cx="70" cy="843.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="847.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">8</text>
+<rect x="755" y="818" width="118" height="23" rx="11.5" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="814.0" y="833.5" font-size="11.5" fill="#3B6D11" font-weight="700" text-anchor="middle">解断点 3·4</text>
+<path d="M490.0 876L490.0 891" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<polygon points="490.0,898.0 770.0,936.0 490.0,974.0 210.0,936.0" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="490.0" y="941.0" font-size="15.5" fill="#633806" font-weight="700" text-anchor="middle">业务负责人是否具名确认？</text>
+<circle cx="70" cy="936.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="940.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">9</text>
+<path d="M772.0 936.0L906 936.0" fill="none" stroke="#A32D2D" stroke-width="1.4" stroke-dasharray="5,4"/>
+<path d="M908 936.0L926 936.0" fill="none" stroke="#A32D2D" stroke-width="1.6" marker-end="url(#arr)"/>
+<text x="870" y="926.0" font-size="12" fill="#6B7280" font-weight="400" text-anchor="middle">否</text>
+<rect x="930" y="894.0" width="660" height="84" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1.2"/>
+<text x="950" y="920.0" font-size="15" fill="#791F1F" font-weight="700" text-anchor="start">退回补充，记录退回人与时间</text>
+<text x="950" y="942.0" font-size="12" fill="#A32D2D" font-weight="400" text-anchor="start">未确认项不得挂对方名下；模型无审批权 · f25 f22 · HC-A</text>
+<path d="M490.0 976L490.0 991" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="998" width="790" height="62" rx="9" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="115" y="1024" font-size="16.5" fill="#633806" font-weight="700" text-anchor="start">交接单发布 · 接收人签收</text>
+<text x="115" y="1046" font-size="12.5" fill="#854F0B" font-weight="400" text-anchor="start">接收人、版本、未结项全部落库可反查 · f20 f45</text>
+<circle cx="70" cy="1029.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1033.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">10</text>
+<path d="M490.0 1062L490.0 1077" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<polygon points="490.0,1084.0 770.0,1122.0 490.0,1160.0 210.0,1122.0" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="490.0" y="1127.0" font-size="15.5" fill="#633806" font-weight="700" text-anchor="middle">现场是否发现条件不一致？</text>
+<circle cx="70" cy="1122.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1126.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">11</text>
+<path d="M772.0 1122.0L906 1122.0" fill="none" stroke="#639922" stroke-width="1.4" stroke-dasharray="5,4"/>
+<path d="M908 1122.0L926 1122.0" fill="none" stroke="#639922" stroke-width="1.6" marker-end="url(#arg)"/>
+<text x="870" y="1112.0" font-size="12" fill="#6B7280" font-weight="400" text-anchor="middle">是</text>
+<rect x="930" y="1080.0" width="660" height="84" rx="8" fill="#EAF3DE" stroke="#639922" stroke-width="1.2"/>
+<text x="950" y="1106.0" font-size="15" fill="#3B6D11" font-weight="700" text-anchor="start">差异登记 · 版本回滚</text>
+<text x="950" y="1128.0" font-size="12" fill="#639922" font-weight="400" text-anchor="start">差异本身成为下一轮输入，不再靠人脑回溯原值 · f11</text>
+<path d="M490.0 1162L490.0 1177" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="1184" width="790" height="62" rx="9" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="115" y="1210" font-size="16.5" fill="#085041" font-weight="700" text-anchor="start">审计留痕 + 周度复盘</text>
+<text x="115" y="1232" font-size="12.5" fill="#0F6E56" font-weight="400" text-anchor="start">误报 / 漏报 / 未确认项共同复盘；只改模板不核效果不算收口 · f45 f55</text>
+<circle cx="70" cy="1215.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1219.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">12</text>
+<rect x="755" y="1190" width="118" height="23" rx="11.5" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="814.0" y="1205.5" font-size="11.5" fill="#3B6D11" font-weight="700" text-anchor="middle">解断点 5 · AI-10</text>
+<path d="M490.0 1248L490.0 1263" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="1270" width="790" height="62" rx="9" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="115" y="1296" font-size="16.5" fill="#085041" font-weight="700" text-anchor="start">场景 B：制度知识库 RAG 问答</text>
+<text x="115" y="1318" font-size="12.5" fill="#0F6E56" font-weight="400" text-anchor="start">BM25 + 中文字符二元组 + 向量三路融合；答案带引用编号，制度外问题拒答</text>
+<circle cx="70" cy="1301.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1305.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">13</text>
+<rect x="755" y="1276" width="118" height="23" rx="11.5" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="814.0" y="1291.5" font-size="11.5" fill="#3B6D11" font-weight="700" text-anchor="middle">AI-04</text>
+<path d="M490.0 1334L490.0 1349" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="1356" width="790" height="62" rx="9" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="115" y="1382" font-size="16.5" fill="#085041" font-weight="700" text-anchor="start">风险规则预筛 → 人工复核队列</text>
+<text x="115" y="1404" font-size="12.5" fill="#0F6E56" font-weight="400" text-anchor="start">命中关键词 / 正则只写 audit_flags(suspected)，系统永不自动判违规 · HC-01</text>
+<circle cx="70" cy="1387.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1391.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">14</text>
+<rect x="755" y="1362" width="118" height="23" rx="11.5" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="814.0" y="1377.5" font-size="11.5" fill="#3B6D11" font-weight="700" text-anchor="middle">AI-06</text>
+<path d="M490.0 1420L490.0 1435" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="1442" width="790" height="62" rx="9" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="115" y="1468" font-size="16.5" fill="#085041" font-weight="700" text-anchor="start">Agent 确认闭环（最多 5 轮）</text>
+<text x="115" y="1490" font-size="12.5" fill="#0F6E56" font-weight="400" text-anchor="start">证据校验 → 制度合规校验 → 建草稿 → 提交；一次性 HMAC 能力令牌 + 服务端状态机门禁</text>
+<circle cx="70" cy="1473.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1477.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">15</text>
+<rect x="755" y="1448" width="118" height="23" rx="11.5" fill="#EAF3DE" stroke="#639922" stroke-width="0.8"/>
+<text x="814.0" y="1463.5" font-size="11.5" fill="#3B6D11" font-weight="700" text-anchor="middle">AI-08 · AI-07</text>
+<path d="M490.0 1506L490.0 1521" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="1528" width="790" height="62" rx="9" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="115" y="1554" font-size="16.5" fill="#633806" font-weight="700" text-anchor="start">管理员人工复核（Agent 权限天花板 SUBMITTED）</text>
+<text x="115" y="1576" font-size="12.5" fill="#854F0B" font-weight="400" text-anchor="start">复核通过 / 驳回 / 关闭 / 结算导出不注册为工具，全部在后台人工完成 · HC-05 · R-03</text>
+<circle cx="70" cy="1559.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1563.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">16</text>
+<text x="70" y="1626" font-size="16" fill="#111827" font-weight="700" text-anchor="start">不可协商的护栏与门禁（服务端确定性校验，不依赖系统提示词）</text>
+<rect x="70" y="1642" width="760" height="56" rx="7" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+<rect x="82" y="1658" width="112" height="23" rx="11.5" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.8"/>
+<text x="138.0" y="1673.5" font-size="11.5" fill="#475569" font-weight="700" text-anchor="middle">R-01 / R-02</text>
+<text x="206" y="1676" font-size="12.5" fill="#334155" font-weight="400" text-anchor="start">不自动决定派遣资格；口头变更一律视为未确认，须补单并经业务负责人确认</text>
+<rect x="850" y="1642" width="760" height="56" rx="7" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+<rect x="862" y="1658" width="112" height="23" rx="11.5" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.8"/>
+<text x="918.0" y="1673.5" font-size="11.5" fill="#475569" font-weight="700" text-anchor="middle">R-03 / R-05</text>
+<text x="986" y="1676" font-size="12.5" fill="#334155" font-weight="400" text-anchor="start">AI 不是审批者，超时只升级不自动通过；无法确认版本即进人工队列</text>
+<rect x="70" y="1708" width="760" height="56" rx="7" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+<rect x="82" y="1724" width="112" height="23" rx="11.5" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.8"/>
+<text x="138.0" y="1739.5" font-size="11.5" fill="#475569" font-weight="700" text-anchor="middle">R-07 / R-08</text>
+<text x="206" y="1742" font-size="12.5" fill="#334155" font-weight="400" text-anchor="start">试点仅脱敏只读导出，不写回三类工具；一期不直连薪资、不开票</text>
+<rect x="850" y="1708" width="760" height="56" rx="7" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+<rect x="862" y="1724" width="112" height="23" rx="11.5" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.8"/>
+<text x="918.0" y="1739.5" font-size="11.5" fill="#475569" font-weight="700" text-anchor="middle">G0 门禁</text>
+<text x="986" y="1742" font-size="12.5" fill="#334155" font-weight="400" text-anchor="start">AI-02 / AI-05 须先取 3~5 个真实电话变更样本，补证未通过不得开工</text>
+<rect x="70" y="1790" width="1540" height="56" rx="7" fill="#EAF3DE" stroke="#A9D18E" stroke-width="1"/>
+<text x="86" y="1813" font-size="13" fill="#3B6D11" font-weight="700" text-anchor="start">Agent 内部状态机：IDLE → EVIDENCE_CHECKED → DRAFT_CREATED → COMPLIANCE_CHECKED → SUBMITTED（任意态可转 ESCALATED）</text>
+<text x="86" y="1833" font-size="12.5" fill="#3B6D11" font-weight="400" text-anchor="start">四层能力边界：L1 按角色裁剪工具白名单 · L2 服务端状态机 + 一次性 HMAC 能力令牌（7 项校验） · L3 幂等 + 全量审计 · L4 系统提示词只改善话术、不承担正确性</text>
+<path d="M70 1864L1610 1864" fill="none" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="70" y="1886" width="26" height="16" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="104" y="1899" font-size="12.5" fill="#475569" font-weight="400" text-anchor="start">常规步骤</text>
+<rect x="200" y="1886" width="26" height="16" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="234" y="1899" font-size="12.5" fill="#475569" font-weight="400" text-anchor="start">AI 自动环节</text>
+<rect x="369" y="1886" width="26" height="16" rx="3" fill="#FAEEDA" stroke="#854F0B" stroke-width="1"/>
+<text x="403" y="1899" font-size="12.5" fill="#475569" font-weight="400" text-anchor="start">人工审批点</text>
+<rect x="512" y="1886" width="26" height="16" rx="3" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<text x="546" y="1899" font-size="12.5" fill="#475569" font-weight="400" text-anchor="start">异常 / 超时路径</text>
+<rect x="707" y="1886" width="26" height="16" rx="3" fill="#EAF3DE" stroke="#639922" stroke-width="1"/>
+<text x="741" y="1899" font-size="12.5" fill="#475569" font-weight="400" text-anchor="start">断点已解 / 护栏</text>
+<rect x="70" y="1920" width="1540" height="40" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+<text x="86" y="1945" font-size="12.5" fill="#64748B" font-weight="400" text-anchor="start">范围声明：AI-09 跨团队口径对齐、AI-10 周度复盘归因为二期；AI-07 Agent 确认闭环目前未接入主聊天链路。X-01~X-05 负向清单（推测客户意图、自动审批、自动写回、静默放行）明确不做。</text>
+</svg>

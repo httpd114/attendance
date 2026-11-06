@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="2070" viewBox="0 0 1680 2070" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,sans-serif">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#6B7280" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#639922" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect x="0" y="0" width="1680" height="2070" fill="#FFFFFF"/>
+<text x="70" y="52" font-size="29" fill="#111827" font-weight="700" text-anchor="start">图 1 · 改造前：岗位服务需求单现状流程（As-Is）</text>
+<text x="70" y="86" font-size="14.5" fill="#6B7280" font-weight="400" text-anchor="start">13 步主链 / 5 处断点 / 4 个判断分支；以典型事件 FSG-SIM-2026-1021-047 的 14:07 → 16:41 时间线贯穿标注</text>
+<text x="70" y="112" font-size="12.5" fill="#9CA3AF" font-weight="400" text-anchor="start">依据：discovery-report.md（f01 f10~f55）· 派遣岗位需求单现状流程图 v1 · 典型事件 AI 整理纪要 · 需求分析方案 v1.0 §1.1 / §2</text>
+<path d="M70 132L1610 132" fill="none" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="95" y="168" width="790" height="62" rx="9" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.2"/>
+<text x="115" y="194" font-size="16.5" fill="#2C2C2A" font-weight="700" text-anchor="start">客户提出或变更岗位需求</text>
+<text x="115" y="216" font-size="12.5" fill="#5F5E5A" font-weight="400" text-anchor="start">电话 / 群消息为主 · 实际链路 f01：提需求 → 条件澄清 → 人员安排 → 到岗交接 → 反馈</text>
+<circle cx="70" cy="199.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="203.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">1</text>
+<path d="M490.0 232L490.0 247" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<polygon points="490.0,254.0 770.0,292.0 490.0,330.0 210.0,292.0" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="490.0" y="297.0" font-size="15.5" fill="#633806" font-weight="700" text-anchor="middle">变更是否正式留单？</text>
+<circle cx="70" cy="292.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="296.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">2</text>
+<path d="M772.0 292.0L906 292.0" fill="none" stroke="#A32D2D" stroke-width="1.4" stroke-dasharray="5,4"/>
+<path d="M908 292.0L926 292.0" fill="none" stroke="#A32D2D" stroke-width="1.6" marker-end="url(#arr)"/>
+<text x="870" y="282.0" font-size="12" fill="#6B7280" font-weight="400" text-anchor="middle">否</text>
+<rect x="930" y="250.0" width="660" height="84" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1.2"/>
+<text x="950" y="276.0" font-size="15" fill="#791F1F" font-weight="700" text-anchor="start">14:12 群消息同步一句，现场先解决</text>
+<text x="950" y="298.0" font-size="12" fill="#A32D2D" font-weight="400" text-anchor="start">先解决后补单；口头 v4 无书面留痕 · f10 f13 f22</text>
+<path d="M490.0 332L490.0 347" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="354" width="790" height="62" rx="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+<text x="115" y="380" font-size="16.5" fill="#0C447C" font-weight="700" text-anchor="start">15:40 事后补填需求单表格</text>
+<text x="115" y="402" font-size="12.5" fill="#185FA5" font-weight="400" text-anchor="start">回填时间被当作业务发生时间，与 14:07 相差 93 分钟 · f13 f34</text>
+<circle cx="70" cy="385.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="389.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">3</text>
+<rect x="755" y="360" width="118" height="23" rx="11.5" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.8"/>
+<text x="814.0" y="375.5" font-size="11.5" fill="#791F1F" font-weight="700" text-anchor="middle">断点 1</text>
+<path d="M490.0 418L490.0 433" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="440" width="790" height="62" rx="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+<text x="115" y="466" font-size="16.5" fill="#0C447C" font-weight="700" text-anchor="start">三类工具分散登记</text>
+<text x="115" y="488" font-size="12.5" fill="#185FA5" font-weight="400" text-anchor="start">服务台 / 台账 / 文件库，无统一关联编号 · f30</text>
+<circle cx="70" cy="471.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="475.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">4</text>
+<path d="M490.0 504L490.0 519" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="526" width="790" height="62" rx="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+<text x="115" y="552" font-size="16.5" fill="#0C447C" font-weight="700" text-anchor="start">人工跨工具比对找最新版本</text>
+<text x="115" y="574" font-size="12.5" fill="#185FA5" font-weight="400" text-anchor="start">秦芮：版本断链已识别，只能人工看字段 · f33</text>
+<circle cx="70" cy="557.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="561.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">5</text>
+<path d="M490.0 590L490.0 605" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<polygon points="490.0,612.0 770.0,650.0 490.0,688.0 210.0,650.0" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="490.0" y="655.0" font-size="15.5" fill="#633806" font-weight="700" text-anchor="middle">能否确认最新版本？</text>
+<circle cx="70" cy="650.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="654.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">6</text>
+<path d="M772.0 650.0L906 650.0" fill="none" stroke="#A32D2D" stroke-width="1.4" stroke-dasharray="5,4"/>
+<path d="M908 650.0L926 650.0" fill="none" stroke="#A32D2D" stroke-width="1.6" marker-end="url(#arr)"/>
+<text x="870" y="640.0" font-size="12" fill="#6B7280" font-weight="400" text-anchor="middle">否</text>
+<rect x="930" y="608.0" width="660" height="84" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1.2"/>
+<text x="950" y="634.0" font-size="15" fill="#791F1F" font-weight="700" text-anchor="start">按文件名或时间戳猜「最新版」</text>
+<text x="950" y="656.0" font-size="12" fill="#A32D2D" font-weight="400" text-anchor="start">缺版本有效期 + 确认状态双条件 · f24 · 断点 2</text>
+<path d="M490.0 690L490.0 705" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="712" width="790" height="62" rx="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+<text x="115" y="738" font-size="16.5" fill="#0C447C" font-weight="700" text-anchor="start">猜版本结论进入交接</text>
+<text x="115" y="760" font-size="12.5" fill="#185FA5" font-weight="400" text-anchor="start">靠人判断哪一版算数，系统无强制校验 · f24 f23</text>
+<circle cx="70" cy="743.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="747.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">7</text>
+<rect x="755" y="718" width="118" height="23" rx="11.5" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.8"/>
+<text x="814.0" y="733.5" font-size="11.5" fill="#791F1F" font-weight="700" text-anchor="middle">断点 2</text>
+<path d="M490.0 776L490.0 791" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="798" width="790" height="62" rx="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+<text x="115" y="824" font-size="16.5" fill="#0C447C" font-weight="700" text-anchor="start">生成岗位交接单（仍挂 v3）</text>
+<text x="115" y="846" font-size="12.5" fill="#185FA5" font-weight="400" text-anchor="start">唐映秋：每次交接记录接收人与版本，但版本本身可能已过期 · f20</text>
+<circle cx="70" cy="829.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="833.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">8</text>
+<path d="M490.0 862L490.0 877" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<polygon points="490.0,884.0 770.0,922.0 490.0,960.0 210.0,922.0" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="490.0" y="927.0" font-size="15.5" fill="#633806" font-weight="700" text-anchor="middle">交接单同步了最新技能要求？</text>
+<circle cx="70" cy="922.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="926.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">9</text>
+<path d="M772.0 922.0L906 922.0" fill="none" stroke="#A32D2D" stroke-width="1.4" stroke-dasharray="5,4"/>
+<path d="M908 922.0L926 922.0" fill="none" stroke="#A32D2D" stroke-width="1.6" marker-end="url(#arr)"/>
+<text x="870" y="912.0" font-size="12" fill="#6B7280" font-weight="400" text-anchor="middle">否</text>
+<rect x="930" y="880.0" width="660" height="84" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1.2"/>
+<text x="950" y="906.0" font-size="15" fill="#791F1F" font-weight="700" text-anchor="start">交接单引用旧技能要求（核心瓶颈）</text>
+<text x="950" y="928.0" font-size="12" fill="#A32D2D" font-weight="400" text-anchor="start">v3 已确认 vs 口头 v4 未确认；技能条件、班次 2 个字段差异 · f10 f11</text>
+<path d="M490.0 962L490.0 977" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="984" width="790" height="62" rx="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+<text x="115" y="1010" font-size="16.5" fill="#0C447C" font-weight="700" text-anchor="start">条件不一致仍向下流转</text>
+<text x="115" y="1032" font-size="12.5" fill="#185FA5" font-weight="400" text-anchor="start">30 岗位批次、8 名待到岗中 3 名已按旧班次回执 · f02 f11（演练设定值）</text>
+<circle cx="70" cy="1015.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1019.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">10</text>
+<rect x="755" y="990" width="118" height="23" rx="11.5" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.8"/>
+<text x="814.0" y="1005.5" font-size="11.5" fill="#791F1F" font-weight="700" text-anchor="middle">断点 3</text>
+<path d="M490.0 1048L490.0 1063" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="1070" width="790" height="62" rx="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+<text x="115" y="1096" font-size="16.5" fill="#0C447C" font-weight="700" text-anchor="start">一线专员提交变更</text>
+<text x="115" y="1118" font-size="12.5" fill="#185FA5" font-weight="400" text-anchor="start">可以提交，但没有正式确认权 · f22</text>
+<circle cx="70" cy="1101.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1105.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">11</text>
+<path d="M490.0 1134L490.0 1149" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<polygon points="490.0,1156.0 770.0,1194.0 490.0,1232.0 210.0,1194.0" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="490.0" y="1199.0" font-size="15.5" fill="#633806" font-weight="700" text-anchor="middle">业务负责人是否正式确认？</text>
+<circle cx="70" cy="1194.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1198.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">12</text>
+<path d="M772.0 1194.0L906 1194.0" fill="none" stroke="#A32D2D" stroke-width="1.4" stroke-dasharray="5,4"/>
+<path d="M908 1194.0L926 1194.0" fill="none" stroke="#A32D2D" stroke-width="1.6" marker-end="url(#arr)"/>
+<text x="870" y="1184.0" font-size="12" fill="#6B7280" font-weight="400" text-anchor="middle">否</text>
+<rect x="930" y="1152.0" width="660" height="84" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1.2"/>
+<text x="950" y="1178.0" font-size="15" fill="#791F1F" font-weight="700" text-anchor="start">挂起、退回补充</text>
+<text x="950" y="1200.0" font-size="12" fill="#A32D2D" font-weight="400" text-anchor="start">未确认项不得归到对方名下；口头改动一律视为未确认 · f25 f22</text>
+<path d="M490.0 1234L490.0 1249" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="1256" width="790" height="62" rx="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+<text x="115" y="1282" font-size="16.5" fill="#0C447C" font-weight="700" text-anchor="start">到岗交接：只发「已处理」</text>
+<text x="115" y="1304" font-size="12.5" fill="#185FA5" font-weight="400" text-anchor="start">缺最新版本、未确认事项、截止时间三要素 · f23 f14</text>
+<circle cx="70" cy="1287.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1291.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">13</text>
+<rect x="755" y="1262" width="118" height="23" rx="11.5" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.8"/>
+<text x="814.0" y="1277.5" font-size="11.5" fill="#791F1F" font-weight="700" text-anchor="middle">断点 4</text>
+<path d="M490.0 1320L490.0 1335" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<polygon points="490.0,1342.0 770.0,1380.0 490.0,1418.0 210.0,1380.0" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+<text x="490.0" y="1385.0" font-size="15.5" fill="#633806" font-weight="700" text-anchor="middle">闭环前现场是否发现条件不一致？</text>
+<circle cx="70" cy="1380.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1384.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">14</text>
+<path d="M772.0 1380.0L906 1380.0" fill="none" stroke="#A32D2D" stroke-width="1.4" stroke-dasharray="5,4"/>
+<path d="M908 1380.0L926 1380.0" fill="none" stroke="#A32D2D" stroke-width="1.6" marker-end="url(#arr)"/>
+<text x="870" y="1370.0" font-size="12" fill="#6B7280" font-weight="400" text-anchor="middle">是</text>
+<rect x="930" y="1334.0" width="660" height="92" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1.2"/>
+<text x="950" y="1360.0" font-size="15" fill="#791F1F" font-weight="700" text-anchor="start">16:05 人工发现 → 16:41 复核关闭</text>
+<text x="950" y="1382.0" font-size="12" fill="#A32D2D" font-weight="400" text-anchor="start">逐个核对 3 人、2 张单返工、36 分钟人工核对、4 条影响清单 · f14 f15 f45</text>
+<path d="M490.0 1420L490.0 1435" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="1442" width="790" height="62" rx="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+<text x="115" y="1468" font-size="16.5" fill="#0C447C" font-weight="700" text-anchor="start">投诉登记与周度复盘</text>
+<text x="115" y="1490" font-size="12.5" fill="#185FA5" font-weight="400" text-anchor="start">审计只留最终摘要、只改模板不核效果 · f45 f54 f55</text>
+<circle cx="70" cy="1473.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1477.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">15</text>
+<rect x="755" y="1448" width="118" height="23" rx="11.5" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.8"/>
+<text x="814.0" y="1463.5" font-size="11.5" fill="#791F1F" font-weight="700" text-anchor="middle">断点 5</text>
+<path d="M490.0 1506L490.0 1521" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="95" y="1528" width="790" height="62" rx="9" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.2"/>
+<text x="115" y="1554" font-size="16.5" fill="#2C2C2A" font-weight="700" text-anchor="start">结束 · 进入下一批次需求</text>
+<text x="115" y="1576" font-size="12.5" fill="#5F5E5A" font-weight="400" text-anchor="start">14:07 发生 → 16:41 关闭，处置跨度 154 分钟 · 试点边界：只读导出，不自动决定派遣资格 f05</text>
+<circle cx="70" cy="1559.0" r="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="70" y="1563.5" font-size="12" fill="#475569" font-weight="700" text-anchor="middle">16</text>
+<text x="70" y="1630" font-size="16" fill="#111827" font-weight="700" text-anchor="start">典型事件时间线 · FSG-SIM-2026-1021-047（AI 重建，须人工复核；全部为演练设定值）</text>
+<rect x="70" y="1648" width="248" height="104" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+<text x="84" y="1672" font-size="14" fill="#A32D2D" font-weight="700" text-anchor="start">14:00 前</text>
+<text x="84" y="1696" font-size="14" fill="#0F172A" font-weight="700" text-anchor="start">v3 已确认</text>
+<text x="84" y="1716" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start">普通话流利、收银经验 1 年以上；</text>
+<text x="84" y="1734" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start">早班 08:00—16:00</text>
+<rect x="330" y="1648" width="248" height="104" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+<text x="344" y="1672" font-size="14" fill="#A32D2D" font-weight="700" text-anchor="start">14:07</text>
+<text x="344" y="1696" font-size="14" fill="#0F172A" font-weight="700" text-anchor="start">电话临时加夜班</text>
+<text x="344" y="1716" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start">客户口头 v4：可接受 22:00</text>
+<text x="344" y="1734" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start">—06:00；无书面留痕</text>
+<rect x="590" y="1648" width="248" height="104" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+<text x="604" y="1672" font-size="14" fill="#A32D2D" font-weight="700" text-anchor="start">14:12</text>
+<text x="604" y="1696" font-size="14" fill="#0F172A" font-weight="700" text-anchor="start">群消息同步一句</text>
+<text x="604" y="1716" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start">现场同事在群里口头转述，先解决后补</text>
+<text x="604" y="1734" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start">单</text>
+<rect x="850" y="1648" width="248" height="104" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+<text x="864" y="1672" font-size="14" fill="#A32D2D" font-weight="700" text-anchor="start">15:40</text>
+<text x="864" y="1696" font-size="14" fill="#0F172A" font-weight="700" text-anchor="start">补填进表格</text>
+<text x="864" y="1716" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start">系统接收时间；若当作发生时间，异常</text>
+<text x="864" y="1734" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start">识别顺序会反转</text>
+<rect x="1110" y="1648" width="248" height="104" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+<text x="1124" y="1672" font-size="14" fill="#A32D2D" font-weight="700" text-anchor="start">16:05</text>
+<text x="1124" y="1696" font-size="14" fill="#0F172A" font-weight="700" text-anchor="start">闭环前人工发现</text>
+<text x="1124" y="1716" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start">交接单仍挂 v3，缺夜班条件；开始</text>
+<text x="1124" y="1734" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start">逐个核对</text>
+<rect x="1370" y="1648" width="248" height="104" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+<text x="1384" y="1672" font-size="14" fill="#A32D2D" font-weight="700" text-anchor="start">16:41</text>
+<text x="1384" y="1696" font-size="14" fill="#0F172A" font-weight="700" text-anchor="start">复核关闭</text>
+<text x="1384" y="1716" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start">挂未结项、留痕原值与来源位置，形成</text>
+<text x="1384" y="1734" font-size="11.5" fill="#475569" font-weight="400" text-anchor="start"> 4 条影响清单</text>
+<text x="70" y="1784" font-size="14" fill="#111827" font-weight="700" text-anchor="start">量化口径（B 级演练设定值，禁止作 ROI 输入与验收基线）</text>
+<rect x="70" y="1798" width="372" height="52" rx="7" fill="#FCEBEB" stroke="#F3C6C6" stroke-width="1"/>
+<text x="84" y="1831" font-size="19" fill="#A32D2D" font-weight="700" text-anchor="start">36 分钟</text>
+<text x="192" y="1829" font-size="11" fill="#791F1F" font-weight="400" text-anchor="start">3 人 × 约 12 分钟人工核对</text>
+<rect x="460" y="1798" width="372" height="52" rx="7" fill="#FCEBEB" stroke="#F3C6C6" stroke-width="1"/>
+<text x="474" y="1831" font-size="19" fill="#A32D2D" font-weight="700" text-anchor="start">93 分钟</text>
+<text x="582" y="1829" font-size="11" fill="#791F1F" font-weight="400" text-anchor="start">发生 14:07 与回填 15:40 混淆</text>
+<rect x="850" y="1798" width="372" height="52" rx="7" fill="#FCEBEB" stroke="#F3C6C6" stroke-width="1"/>
+<text x="864" y="1831" font-size="19" fill="#A32D2D" font-weight="700" text-anchor="start">154 分钟</text>
+<text x="972" y="1829" font-size="11" fill="#791F1F" font-weight="400" text-anchor="start">14:07 → 16:41 处置跨度</text>
+<rect x="1240" y="1798" width="372" height="52" rx="7" fill="#FCEBEB" stroke="#F3C6C6" stroke-width="1"/>
+<text x="1254" y="1831" font-size="19" fill="#A32D2D" font-weight="700" text-anchor="start">3 / 8 人</text>
+<text x="1362" y="1829" font-size="11" fill="#791F1F" font-weight="400" text-anchor="start">按 v3 回执状态口径计数，非估算</text>
+<rect x="70" y="1868" width="1540" height="48" rx="7" fill="#FFF7ED" stroke="#FCD9A8" stroke-width="1"/>
+<text x="86" y="1888" font-size="12.5" fill="#9A5B13" font-weight="400" text-anchor="start">AI 归纳的四层根因链（推断，须 HC-C 书面采信）：L1 口头变更缺强制补单留痕 → L2 版本有效期与确认状态无系统级校验 → L3 三类工具无统一关联编号 → L4 辅助结果只给长摘要不给缺项清单</text>
+<text x="86" y="1906" font-size="12" fill="#9A5B13" font-weight="400" text-anchor="start">L1 在两份调研报告中证据强度冲突（36/36 列为 P0 根因，6/36 指为转述无独立证据），G0 补证前不得定级；「80 单 / 重复澄清 22%」为虚构基线 f12，本图未用于任何结论</text>
+<path d="M70 1934L1610 1934" fill="none" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="70" y="1956" width="26" height="16" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="104" y="1969" font-size="12.5" fill="#475569" font-weight="400" text-anchor="start">常规步骤</text>
+<rect x="200" y="1956" width="26" height="16" rx="3" fill="#FAEEDA" stroke="#854F0B" stroke-width="1"/>
+<text x="234" y="1969" font-size="12.5" fill="#475569" font-weight="400" text-anchor="start">判断点（分支）</text>
+<rect x="369" y="1956" width="26" height="16" rx="3" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<text x="403" y="1969" font-size="12.5" fill="#475569" font-weight="400" text-anchor="start">断点 / 异常路径</text>
+<rect x="564" y="1956" width="26" height="16" rx="3" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+<text x="598" y="1969" font-size="12.5" fill="#475569" font-weight="400" text-anchor="start">起止</text>
+<rect x="668" y="1956" width="26" height="16" rx="3" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1"/>
+<text x="702" y="1969" font-size="12.5" fill="#475569" font-weight="400" text-anchor="start">演练数据标注</text>
+<rect x="70" y="1990" width="1540" height="40" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+<text x="86" y="2015" font-size="12.5" fill="#64748B" font-weight="400" text-anchor="start">性质声明：受访者、单号、时间点、人数与耗时均为合成演练设定，不代表任何真实企业经营数据；本图只作流程评审输入，不构成开发承诺或验收依据。</text>
+</svg>

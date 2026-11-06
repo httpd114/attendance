@@ -11,9 +11,15 @@ import importlib.util
 import json
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-ROOT = HERE.parent
-ENGINE = ROOT.parents[1] / "output" / "上线交付运行手册-v1.0" / "html" / "build_html.py"
+HERE = Path(__file__).resolve().parent          # docs/（v1.1 平铺后的交付目录）
+PROJECT = HERE.parent                           # 项目根
+ENGINE = PROJECT / "output" / "上线交付运行手册-v1.0" / "html" / "build_html.py"
+
+# 注意：output/ 属流水线工作目录，被 .gitignore 排除、未随仓库分发。
+# 在全新克隆中如需复现 HTML→DOCX，须先保留本地工作区的该排版引擎。
+if not ENGINE.is_file():
+    raise SystemExit(f"未找到已验证的排版引擎：{ENGINE}\n"
+                     "请在原工作区运行，或把 output/上线交付运行手册-v1.0/html/build_html.py 放回该路径。")
 
 spec = importlib.util.spec_from_file_location("doc_engine", ENGINE)
 eng = importlib.util.module_from_spec(spec)
@@ -21,7 +27,7 @@ spec.loader.exec_module(eng)
 
 DOCS = [
     dict(
-        md=ROOT / "sources" / "典型事件AI整理纪要.md",
+        md=HERE / "典型事件AI整理纪要.md",
         html="典型事件AI整理纪要.html",
         category="典型事件 · AI 辅助整理纪要",
         title1="派遣业务 AI 数智化项目",
@@ -42,7 +48,7 @@ DOCS = [
         ],
     ),
     dict(
-        md=ROOT / "行业分析文档.md",
+        md=HERE / "行业分析文档.md",
         html="行业分析文档.html",
         category="行业分析 · 公开信息研究",
         title1="派遣业务 AI 数智化项目",
@@ -98,7 +104,7 @@ def main():
             "tables": body.count("<table"), "has_pre": body.count("<pre>"),
         })
         print(json.dumps(report[-1], ensure_ascii=False))
-    (ROOT / "results" / "html_build_report.json").write_text(
+    (HERE / "html_build_report.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 
 

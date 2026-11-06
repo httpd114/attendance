@@ -10,7 +10,8 @@ import io
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+# v1.1 起交付文件平铺在 docs/ 根目录，本脚本与本目录产物同级
+ROOT = Path(__file__).resolve().parent
 SRC_DOC = "docs/discovery-report.md"
 GEN_DATE = "2026-11-06"
 
