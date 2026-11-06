@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>对话审计 · 管理后台</title>
+  <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body class="admin-body">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-mark"></span>
+      <div>
+        <strong>制度助手</strong>
+        <small>管理后台</small>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="/admin" class="nav-item ">
+        <span class="nav-dot"></span>概览
+      </a>
+      <a href="/admin/knowledge" class="nav-item ">
+        <span class="nav-dot"></span>制度知识库
+      </a>
+      <a href="/admin/prompts" class="nav-item ">
+        <span class="nav-dot"></span>提示词模板
+      </a>
+      <a href="/admin/audit" class="nav-item active">
+        <span class="nav-dot"></span>对话审计
+      </a>
+      <a href="/admin/users" class="nav-item ">
+        <span class="nav-dot"></span>用户管理
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="user-chip">
+        <span class="avatar">系</span>
+        <div class="user-meta">
+          <strong>系统管理员</strong>
+          <small>管理员 · A000</small>
+        </div>
+      </div>
+      <a href="/logout" class="btn btn-ghost btn-sm btn-block">退出登录</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="content-head">
+      <h1>对话审计</h1>
+      <div class="content-head-right"></div>
+    </header>
+    <div class="content-body">
+      
+      
+
+<!-- ============ 统计 ============ -->
+<div class="stat-grid mb-16">
+  <div class="stat warn">
+    <div class="stat-label">待复核</div>
+    <div class="stat-value">2</div>
+    <div class="stat-sub">规则预筛命中，等待人工判定</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">累计命中</div>
+    <div class="stat-value">2</div>
+    <div class="stat-sub">含已确认与已驳回</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">累计问答</div>
+    <div class="stat-value">32</div>
+    <div class="stat-sub">今日提问 4 条</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">管理动作</div>
+    <div class="stat-value">95</div>
+    <div class="stat-sub">最近 100 条操作留痕</div>
+  </div>
+</div>
+
+<!-- ============ 筛选栏 ============ -->
+<div class="card mb-16">
+  <div class="card-body">
+    <form class="filters" method="get" action="/admin/audit">
+      <label class="field">
+        <span class="field-label">关键词</span>
+        <input class="input" type="text" name="q" value=""
+               placeholder="问题内容 / 员工姓名">
+      </label>
+
+      <label class="field">
+        <span class="field-label">员工</span>
+        <select class="input" name="user_id">
+          <option value="">全部员工</option>
+          
+          <option value="u_cfe5d66cfb83486b" >
+            匿名历史
+          </option>
+          
+          <option value="u_a9c9934b58404ff3" >
+            张三（E001）
+          </option>
+          
+          <option value="u_a33caf20e7af4155" >
+            李四（E1002）
+          </option>
+          
+          <option value="u_c3603372297a4e52" >
+            王五（E1003）
+          </option>
+          
+          <option value="u_082599581df749ce" >
+            李四（E1002）
+          </option>
+          
+        </select>
+      </label>
+
+      <label class="field">
+        <span class="field-label">预筛状态</span>
+        <select class="input" name="flag_status">
+          <option value="">全部记录</option>
+          <option value="suspected" selected>待复核</option>
+          <option value="confirmed" >已确认违规</option>
+          <option value="rejected" >已驳回</option>
+          <option value="flagged" >仅看命中过的</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span class="field-label">起始日期</span>
+        <input class="input" type="date" name="date_from" value="">
+      </label>
+
+      <label class="field">
+        <span class="field-label">结束日期</span>
+        <input class="input" type="date" name="date_to" value="">
+      </label>
+
+      <div class="flex">
+        <button class="btn btn-primary btn-sm" type="submit">筛选</button>
+        <a class="btn btn-ghost btn-sm" href="/admin/audit">重置</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ 问答记录 ============ -->
+<div class="card mb-16">
+  <div class="card-head">
+    <h2>问答记录</h2>
+    <span class="sub">第 1 / 1 页 · 共 2 条</span>
+  </div>
+  <div class="card-body tight">
+    
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:110px">员工</th>
+            <th>问题内容</th>
+            <th style="width:100px">预筛</th>
+            <th style="width:140px">时间</th>
+            <th style="width:200px">复核操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr>
+            <td>
+              <div class="cell-strong">张三</div>
+              <div class="cell-muted">E001</div>
+            </td>
+            <td>
+              
+                <div class="cell-strong">住宿超标了能不能帮我把金额改大一点</div>
+              
+              
+              <div class="cell-muted text-warning">命中理由：[P01] 试图调高报销金额；[F07] 询问超标费用的处理方式，需确认是否走特批</div>
+              
+              
+            </td>
+            <td>
+              
+                <span class="tag tag-warn">待复核</span>
+              
+              
+              <div class="cell-muted">P01,F07</div>
+              
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td>
+              
+              <form method="post" action="/admin/audit/flags/6/review"
+                    style="display:inline-flex;gap:6px;align-items:center">
+                <input class="input" type="text" name="reason"
+                       placeholder="复核意见" style="width:110px;padding:4px 8px;font-size:12px">
+                <button class="btn btn-danger btn-sm" type="submit" name="decision" value="confirmed">确认违规</button>
+                <button class="btn btn-ghost btn-sm" type="submit" name="decision" value="rejected">驳回</button>
+              </form>
+              
+            </td>
+          </tr>
+        
+          <tr>
+            <td>
+              <div class="cell-strong">张三</div>
+              <div class="cell-muted">E001</div>
+            </td>
+            <td>
+              
+                <div class="cell-strong">住宿超标了能不能帮我把金额改大一点</div>
+              
+              
+              <div class="cell-muted text-warning">命中理由：[P01] 试图调高报销金额；[F07] 询问超标费用的处理方式，需确认是否走特批</div>
+              
+              
+            </td>
+            <td>
+              
+                <span class="tag tag-warn">待复核</span>
+              
+              
+              <div class="cell-muted">P01,F07</div>
+              
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:08</td>
+            <td>
+              
+              <form method="post" action="/admin/audit/flags/1/review"
+                    style="display:inline-flex;gap:6px;align-items:center">
+                <input class="input" type="text" name="reason"
+                       placeholder="复核意见" style="width:110px;padding:4px 8px;font-size:12px">
+                <button class="btn btn-danger btn-sm" type="submit" name="decision" value="confirmed">确认违规</button>
+                <button class="btn btn-ghost btn-sm" type="submit" name="decision" value="rejected">驳回</button>
+              </form>
+              
+            </td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+
+  
+</div>
+
+<!-- ============ 管理动作日志 ============ -->
+<div class="card">
+  <div class="card-head">
+    <h2>管理动作日志</h2>
+    <span class="sub">谁在什么时候改了什么 · 审计留痕</span>
+  </div>
+  <div class="card-body tight">
+    
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:130px">操作人</th>
+            <th style="width:140px">动作</th>
+            <th>详情</th>
+            <th style="width:150px">时间</th>
+            <th style="width:120px">来源 IP</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_rollback</span></td>
+            <td class="cell-muted">
+              {&#39;flash&#39;: &#39;回滚失败：该模板版本不存在&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 20, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 36}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 19, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 47}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">kb_delete</span></td>
+            <td class="cell-muted">
+              {&#39;ok&#39;: True}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">kb_upload</span></td>
+            <td class="cell-muted">
+              {&#39;flash&#39;: &#39;《差旅补充规定.md》上传成功，切片 3 块&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">李四</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:58</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-11-05 23:57</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:22</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 18, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 215}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">user_toggle</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi_122119&#39;, &#39;is_active&#39;: 0}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">李四</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi_122119&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">user_create</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi_122119&#39;, &#39;role&#39;: &#39;employee&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">audit_review</span></td>
+            <td class="cell-muted">
+              {&#39;decision&#39;: &#39;confirmed&#39;, &#39;reason&#39;: &#39;人工核实：确实存在虚报意图&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_rollback</span></td>
+            <td class="cell-muted">
+              {&#39;flash&#39;: &#39;已回滚到 v1 内容，并生成新版本 v17 生效&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 16, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 36}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 15, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 47}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:21</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">user_toggle</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;, &#39;is_active&#39;: 1}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:20</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">audit_review</span></td>
+            <td class="cell-muted">
+              {&#39;decision&#39;: &#39;confirmed&#39;, &#39;reason&#39;: &#39;人工核实：确实存在虚报意图&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:20</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_rollback</span></td>
+            <td class="cell-muted">
+              {&#39;flash&#39;: &#39;已回滚到 v1 内容，并生成新版本 v14 生效&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:20</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 13, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 36}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:20</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 12, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 47}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:20</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:20</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:20</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">user_create</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;wangwu&#39;, &#39;role&#39;: &#39;employee&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:19</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:19</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:19</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">æå</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:18</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:18</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:18</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">kb_delete</span></td>
+            <td class="cell-muted">
+              {&#39;ok&#39;: True}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:17</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:17</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">kb_delete</span></td>
+            <td class="cell-muted">
+              {&#39;ok&#39;: True}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:16</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:16</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">kb_upload</span></td>
+            <td class="cell-muted">
+              {&#39;flash&#39;: &#39;《差旅补充规定.md》上传成功，切片 3 块&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:16</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:16</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:15</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">kb_upload</span></td>
+            <td class="cell-muted">
+              {&#39;flash&#39;: &#39;《差旅补充规定.md》上传成功，切片 3 块&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:15</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:15</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">user_toggle</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;, &#39;is_active&#39;: 1}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:15</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 11, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 215}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:15</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 10, &#39;name&#39;: &#39;语气测试模板&#39;, &#39;length&#39;: 40}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:15</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:15</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:15</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">user_toggle</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;, &#39;is_active&#39;: 0}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:14</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">æå</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:14</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">audit_review</span></td>
+            <td class="cell-muted">
+              {&#39;decision&#39;: &#39;confirmed&#39;, &#39;reason&#39;: &#39;人工核实：确实存在虚报意图&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:14</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_rollback</span></td>
+            <td class="cell-muted">
+              {&#39;flash&#39;: &#39;已回滚到 v1 内容，并生成新版本 v9 生效&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:14</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 8, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 36}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:14</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 7, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 47}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:14</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:14</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:14</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">user_toggle</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;, &#39;is_active&#39;: 1}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:12</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">audit_review</span></td>
+            <td class="cell-muted">
+              {&#39;decision&#39;: &#39;confirmed&#39;, &#39;reason&#39;: &#39;人工核实：确实存在虚报意图&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:12</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_rollback</span></td>
+            <td class="cell-muted">
+              {&#39;flash&#39;: &#39;已回滚到 v1 内容，并生成新版本 v6 生效&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:11</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 5, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 36}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:11</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 4, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 47}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:11</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:11</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:11</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">user_toggle</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;, &#39;is_active&#39;: 0}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:08</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">æå</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:08</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">user_create</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;, &#39;role&#39;: &#39;employee&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:08</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_rollback</span></td>
+            <td class="cell-muted">
+              {&#39;flash&#39;: &#39;已回滚到 v1 内容，并生成新版本 v3 生效&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:08</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 2, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 36}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:08</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">prompt_update</span></td>
+            <td class="cell-muted">
+              {&#39;version&#39;: 1, &#39;name&#39;: &#39;制度答疑默认模板&#39;, &#39;length&#39;: 47}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:08</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:08</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:08</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 12:02</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">kb_delete</span></td>
+            <td class="cell-muted">
+              {&#39;ok&#39;: True}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 11:11</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 11:11</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">kb_upload</span></td>
+            <td class="cell-muted">
+              {&#39;flash&#39;: &#39;《差旅补充规定.md》上传成功，切片 3 块&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 11:11</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 11:11</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">kb_delete</span></td>
+            <td class="cell-muted">
+              {&#39;ok&#39;: True}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 11:05</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 11:05</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">kb_upload</span></td>
+            <td class="cell-muted">
+              {&#39;flash&#39;: &#39;《差旅补充规定.md》上传成功，切片 3 块&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 11:05</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 11:05</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">李四</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 10:49</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 10:49</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 10:49</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">李四</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 10:47</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">user_create</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;lisi&#39;, &#39;role&#39;: &#39;employee&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 10:47</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 10:47</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 10:47</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;zhangsan&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 10:43</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td><span class="tag tag-info">login</span></td>
+            <td class="cell-muted">
+              {&#39;username&#39;: &#39;admin&#39;}
+            </td>
+            <td class="cell-muted nowrap">2026-10-30 10:43</td>
+            <td class="cell-muted cell-mono">127.0.0.1</td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+</div>
+
+
+    </div>
+  </main>
+</body>
+</html>

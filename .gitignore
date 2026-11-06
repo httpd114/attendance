@@ -53,6 +53,14 @@ tests/.tmp_test/
 *.log
 agent_demo.db
 
+# curl cookie jar：内含完整 JWT access_token，绝不入库。
+# 测试脚本（test_auth.sh / test_kb.sh / test_admin3.sh）统一把运行时
+# cookie jar 写入 tests/.tmp_test/（上面已忽略），重跑不会在 tests/ 根目录产生凭据。
+# tests/ 根目录的 5 个 *.txt 是早期手工测试留下的【脱敏样本】，
+# JWT 已替换为 <REDACTED_JWT>，经 git add -f 显式纳入版本控制；
+# 本规则用于阻止今后新增的、未脱敏 cookie jar 被误提交。
+tests/*.txt
+
 # ---------------------------------------------------------------------
 # WorkBuddy 本地工作数据：工作记忆、重构前备份（含运行时数据库）
 # 属于本机内部资料，绝不入库

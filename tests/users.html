@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>用户管理 · 管理后台</title>
+  <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body class="admin-body">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-mark"></span>
+      <div>
+        <strong>制度助手</strong>
+        <small>管理后台</small>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="/admin" class="nav-item ">
+        <span class="nav-dot"></span>概览
+      </a>
+      <a href="/admin/knowledge" class="nav-item ">
+        <span class="nav-dot"></span>制度知识库
+      </a>
+      <a href="/admin/prompts" class="nav-item ">
+        <span class="nav-dot"></span>提示词模板
+      </a>
+      <a href="/admin/audit" class="nav-item ">
+        <span class="nav-dot"></span>对话审计
+      </a>
+      <a href="/admin/users" class="nav-item active">
+        <span class="nav-dot"></span>用户管理
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="user-chip">
+        <span class="avatar">系</span>
+        <div class="user-meta">
+          <strong>系统管理员</strong>
+          <small>管理员 · A000</small>
+        </div>
+      </div>
+      <a href="/logout" class="btn btn-ghost btn-sm btn-block">退出登录</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="content-head">
+      <h1>用户管理</h1>
+      <div class="content-head-right"></div>
+    </header>
+    <div class="content-body">
+      
+      
+
+<!-- ============ 建号 ============ -->
+<div class="card mb-16">
+  <div class="card-head">
+    <h2>新建账号</h2>
+    <span class="sub">系统不开放自助注册，所有账号由管理员创建</span>
+  </div>
+  <div class="card-body">
+    <div class="alert alert-info mb-16">
+      初始密码至少 8 位且同时包含字母和数字。创建后请通过企业内部渠道
+      单独告知员工，并要求首次登录后修改。
+    </div>
+
+    <form method="post" action="/admin/users/create">
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">登录用户名</span>
+          <input class="input" type="text" name="username" required
+                 maxlength="40" placeholder="如 zhangsan">
+        </label>
+        <label class="field">
+          <span class="field-label">显示名</span>
+          <input class="input" type="text" name="display_name"
+                 maxlength="40" placeholder="如 张三">
+        </label>
+      </div>
+
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">初始密码</span>
+          <input class="input" type="text" name="password" required
+                 minlength="8" placeholder="至少 8 位，含字母和数字">
+        </label>
+        <label class="field">
+          <span class="field-label">工号</span>
+          <input class="input" type="text" name="employee_no"
+                 maxlength="30" placeholder="审计按工号筛选时使用">
+        </label>
+      </div>
+
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">角色</span>
+          <select class="input" name="role">
+            <option value="employee">员工</option>
+            <option value="admin">管理员</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="flex mt-16">
+        <button class="btn btn-primary" type="submit">创建账号</button>
+        <span class="text-muted text-sm">租户归属自动取自当前登录管理员</span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ 用户列表 ============ -->
+<div class="card">
+  <div class="card-head">
+    <h2>账号列表</h2>
+    <span class="sub">共 6 个账号 · 本租户</span>
+  </div>
+  <div class="card-body tight">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>显示名</th>
+            <th>用户名</th>
+            <th style="width:90px">角色</th>
+            <th style="width:110px">工号</th>
+            <th style="width:90px">状态</th>
+            <th style="width:150px">最后登录</th>
+            <th style="width:150px">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr>
+            <td class="cell-strong">匿名历史</td>
+            <td class="cell-mono">anonymous</td>
+            <td>
+              
+                <span class="tag tag-muted">员工</span>
+              
+            </td>
+            <td class="cell-muted">—</td>
+            <td>
+              
+                <span class="tag tag-danger">停用</span>
+              
+            </td>
+            <td class="cell-muted nowrap">
+              从未登录
+            </td>
+            <td>
+              <form method="post" action="/admin/users/u_cfe5d66cfb83486b/toggle"
+                    style="display:inline">
+                <button class="btn btn-ghost btn-sm" type="submit">
+                  启用
+                </button>
+              </form>
+              <form method="post" action="/admin/users/u_cfe5d66cfb83486b/reset-password"
+                    style="display:inline">
+                <input class="input" type="text" name="new_password"
+                       placeholder="新密码" required minlength="8"
+                       style="width:104px;padding:4px 8px;font-size:12px">
+                <button class="btn btn-ghost btn-sm" type="submit">重置</button>
+              </form>
+            </td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">张三</td>
+            <td class="cell-mono">zhangsan</td>
+            <td>
+              
+                <span class="tag tag-muted">员工</span>
+              
+            </td>
+            <td class="cell-muted">E001</td>
+            <td>
+              
+                <span class="tag tag-ok">启用</span>
+              
+            </td>
+            <td class="cell-muted nowrap">
+              2026-11-05 23:58
+            </td>
+            <td>
+              <form method="post" action="/admin/users/u_a9c9934b58404ff3/toggle"
+                    style="display:inline">
+                <button class="btn btn-ghost btn-sm" type="submit">
+                  停用
+                </button>
+              </form>
+              <form method="post" action="/admin/users/u_a9c9934b58404ff3/reset-password"
+                    style="display:inline">
+                <input class="input" type="text" name="new_password"
+                       placeholder="新密码" required minlength="8"
+                       style="width:104px;padding:4px 8px;font-size:12px">
+                <button class="btn btn-ghost btn-sm" type="submit">重置</button>
+              </form>
+            </td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">李四</td>
+            <td class="cell-mono">lisi</td>
+            <td>
+              
+                <span class="tag tag-muted">员工</span>
+              
+            </td>
+            <td class="cell-muted">E1002</td>
+            <td>
+              
+                <span class="tag tag-ok">启用</span>
+              
+            </td>
+            <td class="cell-muted nowrap">
+              2026-11-05 23:58
+            </td>
+            <td>
+              <form method="post" action="/admin/users/u_a33caf20e7af4155/toggle"
+                    style="display:inline">
+                <button class="btn btn-ghost btn-sm" type="submit">
+                  停用
+                </button>
+              </form>
+              <form method="post" action="/admin/users/u_a33caf20e7af4155/reset-password"
+                    style="display:inline">
+                <input class="input" type="text" name="new_password"
+                       placeholder="新密码" required minlength="8"
+                       style="width:104px;padding:4px 8px;font-size:12px">
+                <button class="btn btn-ghost btn-sm" type="submit">重置</button>
+              </form>
+            </td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">王五</td>
+            <td class="cell-mono">wangwu</td>
+            <td>
+              
+                <span class="tag tag-muted">员工</span>
+              
+            </td>
+            <td class="cell-muted">E1003</td>
+            <td>
+              
+                <span class="tag tag-danger">停用</span>
+              
+            </td>
+            <td class="cell-muted nowrap">
+              从未登录
+            </td>
+            <td>
+              <form method="post" action="/admin/users/u_c3603372297a4e52/toggle"
+                    style="display:inline">
+                <button class="btn btn-ghost btn-sm" type="submit">
+                  启用
+                </button>
+              </form>
+              <form method="post" action="/admin/users/u_c3603372297a4e52/reset-password"
+                    style="display:inline">
+                <input class="input" type="text" name="new_password"
+                       placeholder="新密码" required minlength="8"
+                       style="width:104px;padding:4px 8px;font-size:12px">
+                <button class="btn btn-ghost btn-sm" type="submit">重置</button>
+              </form>
+            </td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">李四</td>
+            <td class="cell-mono">lisi_122119</td>
+            <td>
+              
+                <span class="tag tag-muted">员工</span>
+              
+            </td>
+            <td class="cell-muted">E1002</td>
+            <td>
+              
+                <span class="tag tag-danger">停用</span>
+              
+            </td>
+            <td class="cell-muted nowrap">
+              2026-10-30 12:21
+            </td>
+            <td>
+              <form method="post" action="/admin/users/u_082599581df749ce/toggle"
+                    style="display:inline">
+                <button class="btn btn-ghost btn-sm" type="submit">
+                  启用
+                </button>
+              </form>
+              <form method="post" action="/admin/users/u_082599581df749ce/reset-password"
+                    style="display:inline">
+                <input class="input" type="text" name="new_password"
+                       placeholder="新密码" required minlength="8"
+                       style="width:104px;padding:4px 8px;font-size:12px">
+                <button class="btn btn-ghost btn-sm" type="submit">重置</button>
+              </form>
+            </td>
+          </tr>
+        
+          <tr>
+            <td class="cell-strong">系统管理员</td>
+            <td class="cell-mono">admin</td>
+            <td>
+              
+                <span class="tag tag-info">管理员</span>
+              
+            </td>
+            <td class="cell-muted">A000</td>
+            <td>
+              
+                <span class="tag tag-ok">启用</span>
+              
+            </td>
+            <td class="cell-muted nowrap">
+              2026-11-05 23:58
+            </td>
+            <td>
+              <form method="post" action="/admin/users/u_3e62b8bb42bf409c/toggle"
+                    style="display:inline">
+                <button class="btn btn-ghost btn-sm" type="submit">
+                  停用
+                </button>
+              </form>
+              <form method="post" action="/admin/users/u_3e62b8bb42bf409c/reset-password"
+                    style="display:inline">
+                <input class="input" type="text" name="new_password"
+                       placeholder="新密码" required minlength="8"
+                       style="width:104px;padding:4px 8px;font-size:12px">
+                <button class="btn btn-ghost btn-sm" type="submit">重置</button>
+              </form>
+            </td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  </main>
+</body>
+</html>

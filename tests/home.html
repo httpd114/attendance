@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>概览 · 管理后台</title>
+  <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body class="admin-body">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-mark"></span>
+      <div>
+        <strong>制度助手</strong>
+        <small>管理后台</small>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="/admin" class="nav-item active">
+        <span class="nav-dot"></span>概览
+      </a>
+      <a href="/admin/knowledge" class="nav-item ">
+        <span class="nav-dot"></span>制度知识库
+      </a>
+      <a href="/admin/prompts" class="nav-item ">
+        <span class="nav-dot"></span>提示词模板
+      </a>
+      <a href="/admin/audit" class="nav-item ">
+        <span class="nav-dot"></span>对话审计
+      </a>
+      <a href="/admin/users" class="nav-item ">
+        <span class="nav-dot"></span>用户管理
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="user-chip">
+        <span class="avatar">系</span>
+        <div class="user-meta">
+          <strong>系统管理员</strong>
+          <small>管理员 · A000</small>
+        </div>
+      </div>
+      <a href="/logout" class="btn btn-ghost btn-sm btn-block">退出登录</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="content-head">
+      <h1>概览</h1>
+      <div class="content-head-right"></div>
+    </header>
+    <div class="content-body">
+      
+      
+
+<!-- ============ 关键指标 ============ -->
+<div class="stat-grid">
+  <div class="stat accent">
+    <div class="stat-label">制度文档</div>
+    <div class="stat-value">1</div>
+    <div class="stat-sub">1 份就绪 · 0 份失败</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">检索切片</div>
+    <div class="stat-value">11</div>
+    <div class="stat-sub">
+      
+        向量路已启用
+      
+    </div>
+  </div>
+  <div class="stat warn">
+    <div class="stat-label">待复核问答</div>
+    <div class="stat-value">1</div>
+    <div class="stat-sub">规则预筛命中 1 条</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">今日问答</div>
+    <div class="stat-value">0</div>
+    <div class="stat-sub">累计 28 个会话</div>
+  </div>
+</div>
+
+<!-- ============ 提示词状态 ============ -->
+<div class="card mb-16">
+  <div class="card-head">
+    <h2>系统提示词</h2>
+    <span class="sub">当前生效版本 v18</span>
+  </div>
+  <div class="card-body">
+    
+    <div class="alert alert-info">
+      管理员可在
+      <a href="/admin/prompts">提示词模板页</a>
+      修改正文部分，保存后立即对问答生效。强制规则段不可编辑——
+      它承载引用编号校验与拒答规则，删掉会破坏可追溯性。
+    </div>
+    
+  </div>
+</div>
+
+<!-- ============ 快捷入口 ============ -->
+<div class="grid-2">
+  <div class="card">
+    <div class="card-head"><h2>制度知识库</h2></div>
+    <div class="card-body">
+      <p class="text-muted text-sm mb-16">
+        上传或删除制度文档。文档变动后索引会立即重建，员工问答即刻生效。
+      </p>
+      <a class="btn btn-primary btn-sm" href="/admin/knowledge">管理知识库</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><h2>对话审计</h2></div>
+    <div class="card-body">
+      <p class="text-muted text-sm mb-16">
+        按员工与时间筛选问答记录，复核系统预筛出的疑似违规问题。
+      </p>
+      <a class="btn btn-primary btn-sm" href="/admin/audit">进入审计</a>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  </main>
+</body>
+</html>
