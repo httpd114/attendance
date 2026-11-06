@@ -1,0 +1,45 @@
+{
+  "passed": false,
+  "score": 94,
+  "dimensions": {
+    "design_token_compliance": {
+      "passed": true,
+      "score": 100,
+      "issues": []
+    },
+    "structural_integrity": {
+      "passed": true,
+      "score": 100,
+      "issues": []
+    },
+    "typographic_quality": {
+      "passed": false,
+      "score": 70,
+      "issues": [
+        "[TQ-04] 文档出现 5 个 <h1>，每个文档只应有 1 个主标题",
+        "[TQ-05] 文档出现 24 个 <h2>（WARNING），建议检查是否过于碎片化",
+        "[TQ-06] 正文 <p> 使用了多个不同字号 token --fs-body,--fs-cover-cat,--fs-cover-note,--fs-cover-sub,--fs-cover-title,--fs-toc-title，请统一为 var(--fs-body)"
+      ]
+    },
+    "genre_fit": {
+      "passed": true,
+      "score": 100,
+      "issues": []
+    },
+    "decoration_usage": {
+      "passed": true,
+      "score": 100,
+      "issues": []
+    },
+    "security": {
+      "passed": true,
+      "score": 100,
+      "issues": []
+    }
+  },
+  "actionable_feedback": [
+    "[TQ-04] 文档出现 5 个 <h1>，每个文档只应有 1 个主标题",
+    "[TQ-05] 文档出现 24 个 <h2>（WARNING），建议检查是否过于碎片化",
+    "[TQ-06] 正文 <p> 使用了多个不同字号 token --fs-body,--fs-cover-cat,--fs-cover-note,--fs-cover-sub,--fs-cover-title,--fs-toc-title，请统一为 var(--fs-body)"
+  ]
+}

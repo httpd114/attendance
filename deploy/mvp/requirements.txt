@@ -1,0 +1,9 @@
+# MVP 部署产物依赖（Python 3.11+，单端口 HTTP 服务，SQLite 内置）
+fastapi>=0.110,<1.0
+uvicorn>=0.27,<1.0
+pydantic>=2.6,<3.0
+requests>=2.31,<3.0
+numpy>=1.26,<3.0
+faiss-cpu>=1.8,<2.0
+rank_bm25>=0.2.2,<1.0
+jieba>=0.42,<1.0

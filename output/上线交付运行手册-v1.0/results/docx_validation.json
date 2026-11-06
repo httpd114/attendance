@@ -1,0 +1,82 @@
+[
+  {
+    "name": "MVP系统上线部署地址说明.docx",
+    "size": 100714,
+    "images": 1,
+    "drawings": 1,
+    "tables": 10,
+    "sect": 3,
+    "footer": true,
+    "chars": 3302
+  },
+  {
+    "name": "对抗场景测试.docx",
+    "size": 282985,
+    "images": 2,
+    "drawings": 2,
+    "tables": 6,
+    "sect": 3,
+    "footer": true,
+    "chars": 3012
+  },
+  {
+    "name": "故障场景测试.docx",
+    "size": 264564,
+    "images": 2,
+    "drawings": 2,
+    "tables": 6,
+    "sect": 3,
+    "footer": true,
+    "chars": 3077
+  },
+  {
+    "name": "权限场景测试.docx",
+    "size": 225275,
+    "images": 2,
+    "drawings": 2,
+    "tables": 6,
+    "sect": 3,
+    "footer": true,
+    "chars": 3383
+  },
+  {
+    "name": "正常场景测试.docx",
+    "size": 256433,
+    "images": 2,
+    "drawings": 2,
+    "tables": 6,
+    "sect": 3,
+    "footer": true,
+    "chars": 3334
+  },
+  {
+    "name": "测试方案.docx",
+    "size": 93446,
+    "images": 1,
+    "drawings": 1,
+    "tables": 14,
+    "sect": 3,
+    "footer": true,
+    "chars": 7162
+  },
+  {
+    "name": "边界场景测试.docx",
+    "size": 235836,
+    "images": 2,
+    "drawings": 2,
+    "tables": 6,
+    "sect": 3,
+    "footer": true,
+    "chars": 2729
+  },
+  {
+    "name": "项目上线交付运行手册.docx",
+    "size": 464188,
+    "images": 4,
+    "drawings": 4,
+    "tables": 18,
+    "sect": 3,
+    "footer": true,
+    "chars": 10846
+  }
+]
