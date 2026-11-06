@@ -141,6 +141,12 @@ attendance/
 │   ├── static/               # 前端资源（员工端 HTML、后台 CSS）
 │   └── templates/            # Jinja2 页面模板
 │
+├── src/mvp/                  # 阶段 2 SSE 聊天 MVP 归档（历史版本，不再迭代）
+│   ├── main.py               # 最小 FastAPI 入口（按阶段 2 接口契约重建）
+│   ├── rag_engine.py         # 原版算法层（历史文件字节级保留）
+│   ├── static/index.html     # 原版单页前端
+│   └── README.md             # 来源说明、启动命令、已知限制
+│
 ├── docs/                     # 设计、API、需求、方案、报价、上线清单
 │   ├── design.md             # 架构与关键设计决策
 │   └── api.md                # 接口与 SSE 协议
@@ -153,6 +159,8 @@ attendance/
 ```
 
 路径解析集中在 `src/attendance_agent/utils/paths.py`：`static/`、`templates/` 随包发布，SQLite 与索引缓存放项目根 `data/`，均可由环境变量覆盖。
+
+`src/mvp/` 是**历史归档**：阶段 2 的 SSE 聊天最小可运行版本，与主应用相互独立——不参与 `pyproject.toml` 打包、不需要登录、不配置密钥也能离线演示（纯 BM25 + MockLLM）。来源与启动方式见 [`src/mvp/README.md`](src/mvp/README.md)。
 
 ### 从旧结构迁移过来的文件在哪
 
@@ -198,6 +206,7 @@ attendance/
 | `docs/上线前检查清单-派遣考勤异常双向确认-v1.0.md` | 25 项上线勾验 |
 | `docs/discovery-report.md` | 现状调研 |
 | `docs/peer-benchmark-proposal.md` | 同行方案对标 |
+| `src/mvp/README.md` | 阶段 2 MVP 归档：文件来源、启动命令、已知限制 |
 
 ---
 

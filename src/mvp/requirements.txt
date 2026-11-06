@@ -1,0 +1,14 @@
+# 阶段 2 MVP 归档版的最小依赖（不锁版本，仅用于跑通归档代码）
+# 若要重现项目已验证的精确版本组合，请改用仓库根：
+#   pip install -r ../../requirements.txt
+#
+#   pip install -r requirements.txt
+
+fastapi
+uvicorn
+pydantic
+requests
+numpy
+faiss-cpu
+rank_bm25
+jieba

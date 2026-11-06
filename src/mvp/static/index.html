@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>报销制度问答 · 员工端</title>
+<style>
+  /* ---------- 基础布局 ---------- */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f6f8; color: #1f2329; height: 100vh;
+    display: flex; flex-direction: column;
+  }
+  header {
+    background: #fff; border-bottom: 1px solid #e5e6eb;
+    padding: 14px 24px; display: flex; align-items: center;
+    justify-content: space-between; flex-shrink: 0;
+  }
+  header h1 { font-size: 16px; font-weight: 600; }
+  header .sub { font-size: 12px; color: #8a9099; margin-top: 2px; }
+  .btn-new {
+    border: 1px solid #d9dbe0; background: #fff; color: #4a5260;
+    padding: 6px 14px; border-radius: 6px; font-size: 13px; cursor: pointer;
+  }
+  .btn-new:hover { background: #f2f3f5; }
+
+  /* ---------- 消息流 ---------- */
+  #chat {
+    flex: 1; overflow-y: auto; padding: 20px 24px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .row { display: flex; }
+  .row.user { justify-content: flex-end; }
+  .bubble {
+    max-width: 72%; padding: 11px 15px; border-radius: 10px;
+    font-size: 14px; line-height: 1.7; word-break: break-word;
+    white-space: pre-wrap;
+  }
+  .row.user .bubble { background: #3370ff; color: #fff; border-bottom-right-radius: 3px; }
+  .row.assistant .bubble {
+    background: #fff; border: 1px solid #e5e6eb;
+    border-bottom-left-radius: 3px;
+  }
+  .bubble b { color: #d83931; font-weight: 600; }
+
+  /* 光标：流式输出时显示 */
+  .cursor {
+    display: inline-block; width: 2px; height: 1em; background: #3370ff;
+    vertical-align: text-bottom; animation: blink 0.9s steps(2) infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- 引用来源 ---------- */
+  .citations {
+    margin-top: 10px; border-top: 1px dashed #e5e6eb; padding-top: 8px;
+    font-size: 12px; color: #6b7280;
+  }
+  .citations-title {
+    font-weight: 600; color: #4a5260; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .cite-item {
+    background: #f7f8fa; border: 1px solid #eceef1; border-radius: 6px;
+    padding: 7px 10px; margin-bottom: 5px; cursor: pointer;
+  }
+  .cite-item:hover { background: #eef1f5; }
+  .cite-head { display: flex; align-items: center; gap: 6px; }
+  .cite-no {
+    background: #3370ff; color: #fff; border-radius: 3px;
+    padding: 0 5px; font-size: 11px; flex-shrink: 0;
+  }
+  .cite-file { color: #1f2329; font-weight: 500; }
+  .cite-sec { color: #8a9099; }
+  .cite-snippet {
+    display: none; margin-top: 6px; color: #4a5260; line-height: 1.6;
+    white-space: pre-wrap; border-left: 2px solid #d9dbe0; padding-left: 8px;
+  }
+  .cite-item.open .cite-snippet { display: block; }
+
+  /* 引用异常警示 */
+  .cite-warn {
+    background: #fff7e6; border: 1px solid #ffd591; color: #ad4e00;
+    border-radius: 6px; padding: 7px 10px; margin-top: 6px; font-size: 12px;
+  }
+
+  /* ---------- 状态条 ---------- */
+  #status {
+    padding: 0 24px; height: 0; overflow: hidden;
+    font-size: 12px; color: #8a9099; transition: height .2s;
+    display: flex; align-items: center; gap: 7px; flex-shrink: 0;
+  }
+  #status.show { height: 26px; }
+  .spinner {
+    width: 11px; height: 11px; border: 2px solid #d9dbe0;
+    border-top-color: #3370ff; border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- 错误条 ---------- */
+  #errbar {
+    display: none; margin: 0 24px 8px; padding: 9px 13px;
+    background: #fff1f0; border: 1px solid #ffccc7; border-radius: 6px;
+    color: #a8071a; font-size: 13px; flex-shrink: 0;
+  }
+  #errbar.show { display: block; }
+  #errbar .code {
+    font-family: monospace; background: #ffccc7; border-radius: 3px;
+    padding: 0 5px; margin-right: 7px;
+  }
+
+  /* ---------- 输入区 ---------- */
+  #inputbar {
+    background: #fff; border-top: 1px solid #e5e6eb; padding: 12px 24px 16px;
+    display: flex; gap: 10px; flex-shrink: 0;
+  }
+  #q {
+    flex: 1; border: 1px solid #d9dbe0; border-radius: 8px;
+    padding: 10px 12px; font-size: 14px; font-family: inherit;
+    resize: none; outline: none; line-height: 1.5;
+  }
+  #q:focus { border-color: #3370ff; }
+  #send {
+    background: #3370ff; color: #fff; border: none; border-radius: 8px;
+    padding: 0 22px; font-size: 14px; cursor: pointer; flex-shrink: 0;
+  }
+  #send:hover:not(:disabled) { background: #295fe0; }
+  #send:disabled { background: #a8c0ff; cursor: not-allowed; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>报销制度问答</h1>
+    <div class="sub">派遣项目考勤异常双向确认系统 · 员工端</div>
+  </div>
+  <button class="btn-new" id="btnNew">新会话</button>
+</header>
+
+<div id="chat"></div>
+
+<div id="status"><span class="spinner"></span><span id="statustext"></span></div>
+<div id="errbar"><span class="code" id="errcode"></span><span id="errmsg"></span></div>
+
+<div id="inputbar">
+  <textarea id="q" rows="1" placeholder="输入问题，例如：出差住宿费一晚最多能报多少？（Enter 发送，Shift+Enter 换行）"></textarea>
+  <button id="send">发送</button>
+</div>
+
+<script>
+/* ==================================================================
+ * 前端逻辑（原生 JS，无框架）
+ * ================================================================== */
+
+// ---------- 全局状态 ----------
+const state = {
+  // 会话 ID 存 localStorage：刷新页面后能接着聊，而不是每次新开会话
+  sessionId: localStorage.getItem('chat_session_id') || null,
+  streaming: false,
+  // 流式输出累积的纯文本；每次刷新都从完整文本重新渲染，避免 HTML 标签被截断
+  streamText: '',
+  // 打字机合帧缓冲：模型吐字常一小批一小批到，直接追加会一跳一跳
+  pending: '',
+  flushTimer: null,
+};
+
+const chatEl   = document.getElementById('chat');
+const qEl      = document.getElementById('q');
+const sendEl   = document.getElementById('send');
+const statusEl = document.getElementById('status');
+const statusTx = document.getElementById('statustext');
+const errEl    = document.getElementById('errbar');
+const errCode  = document.getElementById('errcode');
+const errMsg   = document.getElementById('errmsg');
+
+// ---------- 工具 ----------
+function scrollBottom() { chatEl.scrollTop = chatEl.scrollHeight; }
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/**
+ * 极简 markdown 渲染：只处理 **加粗** 和换行。
+ * 不引第三方库——制度问答的回答格式很固定，够用了。
+ * 先 escape 再做替换，防止回答里的 < > 被当 HTML 解析（XSS）。
+ */
+function renderMd(s) {
+  return escapeHtml(s)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/\n/g, '<br>');
+}
+
+function showStatus(text) {
+  statusTx.textContent = text;
+  statusEl.classList.add('show');
+}
+function hideStatus() { statusEl.classList.remove('show'); }
+
+function showError(code, msg, detail) {
+  errCode.textContent = code;
+  errMsg.textContent = msg + (detail ? `（${detail}）` : '');
+  errEl.classList.add('show');
+}
+function hideError() { errEl.classList.remove('show'); }
+
+// ---------- 消息渲染 ----------
+function addUserBubble(text) {
+  const row = document.createElement('div');
+  row.className = 'row user';
+  row.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
+  chatEl.appendChild(row);
+  scrollBottom();
+}
+
+function addAssistantBubble() {
+  const row = document.createElement('div');
+  row.className = 'row assistant';
+  row.innerHTML = `
+    <div class="bubble">
+      <span class="content"></span><span class="cursor"></span>
+      <div class="citations" style="display:none">
+        <div class="citations-title">📄 制度来源</div>
+        <div class="cite-list"></div>
+      </div>
+    </div>`;
+  chatEl.appendChild(row);
+  scrollBottom();
+  return row;
+}
+
+/**
+ * 打字机刷帧：16ms 一次。
+ * 关键点：每次都从 state.streamText 完整重渲染，而不是增量 append HTML。
+ * 否则 "**加粗" 这种半截标记会生成残缺标签，把后面的内容全吞掉。
+ */
+function scheduleFlush(bubble) {
+  if (state.flushTimer) return;
+  state.flushTimer = setTimeout(() => {
+    state.flushTimer = null;
+    if (!state.pending) return;
+    state.streamText += state.pending;
+    state.pending = '';
+    bubble.querySelector('.content').innerHTML = renderMd(state.streamText);
+    scrollBottom();
+  }, 16);
+}
+
+function finishStream(bubble) {
+  // 把残留缓冲一次性吐出，避免丢尾巴
+  if (state.pending) {
+    state.streamText += state.pending;
+    state.pending = '';
+  }
+  bubble.querySelector('.content').innerHTML = renderMd(state.streamText);
+  bubble.querySelector('.cursor').remove();
+}
+
+// ---------- 引用来源渲染 ----------
+function renderCitations(bubble, items) {
+  if (!items || !items.length) return;
+  const box = bubble.querySelector('.citations');
+  const list = bubble.querySelector('.cite-list');
+  box.style.display = 'block';
+
+  items.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'cite-item';
+    // 显示：文件名 + 章节标题；片段默认折叠，点击展开
+    div.innerHTML = `
+      <div class="cite-head">
+        <span class="cite-no">[${c.index}]</span>
+        <span class="cite-file">${escapeHtml(c.source_file || '制度文件')}</span>
+        <span class="cite-sec">${escapeHtml(c.section || '')}</span>
+      </div>
+      <div class="cite-snippet">${escapeHtml(c.snippet || '')}</div>`;
+    div.onclick = () => div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+
+function renderCiteWarning(bubble, check) {
+  if (!check || check.ok) return;
+  const box = bubble.querySelector('.citations');
+  box.style.display = 'block';
+  const w = document.createElement('div');
+  w.className = 'cite-warn';
+  if (!check.has_citation) {
+    w.textContent = '⚠️ 该回答未标注引用编号，答案不可溯源，请谨慎采纳。';
+  } else {
+    w.textContent = `⚠️ 引用编号异常：${(check.out_of_range || []).join('、')} 超出范围，来源可能指向错误。`;
+  }
+  box.appendChild(w);
+}
+
+/**
+ * 拒答徽标：制度没覆盖问题时，模型按规则回答"制度中未作规定"。
+ * 这是**正确行为**，不是错误——不能跟"没标注引用"一样弹警示，
+ * 否则用户很快学会忽略所有警示。所以单独给一个中性提示。
+ */
+function renderRefusalBadge(bubble, check) {
+  if (!check || !check.is_refusal) return;
+  const box = bubble.querySelector('.citations');
+  box.style.display = 'block';
+  const b = document.createElement('div');
+  b.style.cssText = 'color:#8a9099;font-size:12px;margin-top:4px';
+  b.textContent = 'ℹ️ 该问题制度未作规定，已按规则拒答';
+  box.appendChild(b);
+}
+
+// ==================================================================
+// SSE 流解析
+// ----------------------------------------------------------------
+// 两个必须踩过的坑，先说明：
+// 1. **不能用 EventSource**。原生 EventSource 只支持 GET，
+//    而 /chat 是 POST。必须用 fetch + response.body.getReader()。
+// 2. **必须按空行分帧**。SSE 的一帧由若干 "field: value" 行组成，
+//    以空行结束。TCP 分包不保证一帧一次到达，也不能保证一行完整，
+//    所以要自己维护 buffer 并按 "\n\n" 切。
+// ==================================================================
+async function readSSE(resp, handlers) {
+  const reader = resp.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+
+    let idx;
+    while ((idx = buffer.indexOf('\n\n')) !== -1) {
+      const frame = buffer.slice(0, idx);
+      buffer = buffer.slice(idx + 2);
+      handleFrame(frame, handlers);
+    }
+  }
+}
+
+function handleFrame(frame, handlers) {
+  let event = 'message', data = '';
+  for (const line of frame.split('\n')) {
+    if (line.startsWith('event:')) event = line.slice(6).trim();
+    else if (line.startsWith('data:')) data += line.slice(5).trim();
+  }
+  if (!data) return;
+  let payload;
+  try { payload = JSON.parse(data); }
+  catch (e) { console.error('SSE data 解析失败', data, e); return; }
+  if (handlers[event]) handlers[event](payload);
+}
+
+// ==================================================================
+// 发送问题
+// ==================================================================
+async function send() {
+  const question = qEl.value.trim();
+  if (!question || state.streaming) return;
+
+  state.streaming = true;
+  sendEl.disabled = true;
+  hideError();
+  addUserBubble(question);
+  qEl.value = '';
+
+  state.streamText = '';
+  state.pending = '';
+  const bubble = addAssistantBubble();
+
+  try {
+    const resp = await fetch('/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: state.sessionId, question }),
+    });
+
+    // 非 200：后端返回统一 JSON 错误体（code + message + detail）
+    if (!resp.ok) {
+      let err = { code: resp.status, message: '请求失败', detail: '' };
+      try { err = await resp.json(); } catch (e) { /* 保持默认 */ }
+      showError(err.code, err.message, err.detail);
+      bubble.querySelector('.cursor').remove();
+      bubble.querySelector('.content').textContent = '（未获得回答）';
+      return;
+    }
+
+    await readSSE(resp, {
+      // 会话 ID 回传：首次提问时保存到 localStorage
+      meta: (d) => {
+        state.sessionId = d.session_id;
+        localStorage.setItem('chat_session_id', d.session_id);
+      },
+      // 状态提示：检索中 / 生成中
+      status: (d) => showStatus(d.text),
+      // 引用在 delta 之前到达，回答还在生成时底部来源就已显示
+      citations: (d) => renderCitations(bubble, d.items),
+      // 打字机数据源
+      delta: (d) => { state.pending += d.text; scheduleFlush(bubble); },
+      done: (d) => {
+        hideStatus();
+        finishStream(bubble);
+        renderCiteWarning(bubble, d.citation_check);
+        renderRefusalBadge(bubble, d.citation_check);
+      },
+      // 流中途失败
+      error: (d) => {
+        hideStatus();
+        finishStream(bubble);
+        showError(d.code, d.message, d.detail);
+      },
+    });
+
+    // 流正常结束但没收到 done（连接被截断）——也要收尾，否则光标一直闪
+    if (state.streaming) {
+      hideStatus();
+      finishStream(bubble);
+    }
+  } catch (e) {
+    hideStatus();
+    showError('NETWORK', '网络请求失败', String(e));
+    bubble.querySelector('.cursor')?.remove();
+  } finally {
+    state.streaming = false;
+    sendEl.disabled = false;
+    qEl.focus();
+  }
+}
+
+// ==================================================================
+ * 历史恢复：刷新页面后把之前的对话画回来
+ * ================================================================== */
+async function restoreHistory() {
+  if (!state.sessionId) return;
+  try {
+    const resp = await fetch(`/api/sessions/${state.sessionId}/messages`);
+    if (!resp.ok) {
+      // 会话不存在（比如换了浏览器/清了存储）→ 静默开新会话
+      localStorage.removeItem('chat_session_id');
+      state.sessionId = null;
+      return;
+    }
+    const data = await resp.json();
+    (data.messages || []).forEach(m => {
+      if (m.role === 'user') {
+        addUserBubble(m.content);
+      } else if (m.role === 'assistant' && m.status === 'done') {
+        const row = document.createElement('div');
+        row.className = 'row assistant';
+        row.innerHTML = `<div class="bubble"><span class="content"></span></div>`;
+        row.querySelector('.content').innerHTML = renderMd(m.content);
+        chatEl.appendChild(row);
+        // 历史消息也要能看引用来源
+        if (m.citations && m.citations.length) {
+          const box = document.createElement('div');
+          box.className = 'citations';
+          box.style.display = 'block';
+          box.innerHTML = '<div class="citations-title">📄 制度来源</div>';
+          const list = document.createElement('div');
+          m.citations.forEach(c => {
+            const div = document.createElement('div');
+            div.className = 'cite-item';
+            div.innerHTML = `
+              <div class="cite-head">
+                <span class="cite-no">[${c.index}]</span>
+                <span class="cite-file">${escapeHtml(c.source_file || '制度文件')}</span>
+                <span class="cite-sec">${escapeHtml(c.section || '')}</span>
+              </div>
+              <div class="cite-snippet">${escapeHtml(c.snippet || '')}</div>`;
+            div.onclick = () => div.classList.toggle('open');
+            list.appendChild(div);
+          });
+          box.appendChild(list);
+          if (m.citation_check && !m.citation_check.ok) {
+            const w = document.createElement('div');
+            w.className = 'cite-warn';
+            w.textContent = '⚠️ 该回答引用编号异常，来源可能指向错误。';
+            box.appendChild(w);
+          } else if (m.citation_check && m.citation_check.is_refusal) {
+            const b = document.createElement('div');
+            b.style.cssText = 'color:#8a9099;font-size:12px;margin-top:4px';
+            b.textContent = 'ℹ️ 该问题制度未作规定，已按规则拒答';
+            box.appendChild(b);
+          }
+          row.querySelector('.bubble').appendChild(box);
+        }
+      }
+    });
+    scrollBottom();
+  } catch (e) {
+    console.error('历史恢复失败', e);
+  }
+}
+
+// ---------- 事件绑定 ----------
+sendEl.onclick = send;
+qEl.addEventListener('keydown', (e) => {
+  // Enter 发送，Shift+Enter 换行
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+});
+document.getElementById('btnNew').onclick = () => {
+  localStorage.removeItem('chat_session_id');
+  state.sessionId = null;
+  chatEl.innerHTML = '';
+  hideError();
+  qEl.focus();
+};
+
+// ---------- 启动 ----------
+restoreHistory();
+qEl.focus();
+</script>
+</body>
+</html>
